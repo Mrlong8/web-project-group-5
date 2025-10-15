@@ -1,0 +1,503 @@
+/* ===============================PHẦN MENU HEADER======================== */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    padding: 10px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    /* z-index: 1000; */
+    background-color: white;
+}
+
+.logo-image img {
+    max-width: 150px;
+    height: auto;
+}
+
+.menu-head ul {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding-right: 30px;
+}
+
+.menu-head ul li {
+    list-style: none;
+}
+
+.menu-head ul li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    transform-origin: 0.4s;
+}
+
+/* cchuyển màu và giữ nguyên màu khi ấn vào */
+.menu-head ul li a:hover {
+    color: red;
+    border-bottom: 2px solid red;
+    padding-bottom: 5px;
+}
+
+.menu-head ul li a:focus {
+    color: red;
+}
+
+.menu-head .btn {
+    display: none;
+    font-size: 30px;
+    color: black;
+}
+
+
+@media (max-width: 800px) {
+    .menu-head ul {
+        display: none;
+        flex-direction: column;
+        /* xếp dọc khi mở */
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 200px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        gap: 0;
+        /* height: 100vh; */
+    }
+
+    .menu-head ul li {
+        padding: 20px;
+    }
+
+    .menu-head ul.show {
+        display: flex;
+    }
+
+    .menu-head .btn {
+        display: block;
+        cursor: pointer;
+    }
+}
+
+
+/* =================================PHẦN MENU HOME=============================== */
+main {
+    display: flex;
+    justify-content: center;
+    max-width: 1520px;
+    width: 95%;
+    /* text-align: center; */
+    margin: auto;
+
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.main-car {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.menu-main ul {
+    display: flex;
+    gap: 1vw;
+    border-bottom: 1px solid black;
+    padding: 0;
+    align-items: center;
+    justify-content: space-evenly;
+    /*điều chỉnh phóng to thu nhỏ khi co lại */
+    /* max-width: 900px; */
+    width: 100%;
+    /* flex-wrap: wrap; */
+}
+
+.menu-main ul li {
+    list-style: none;
+    transition: 0.4s;
+    padding: 10px 1vw;
+    transition: 0.4s;
+}
+
+/* chuyển màu menu main */
+.menu-main ul li:hover {
+    background-color: rgb(22, 194, 176);
+
+}
+
+.menu-main ul li a:focus {
+    color: red;
+    /* background-color: rgb(22, 194, 176); */
+}
+
+.menu-main ul li a {
+    text-decoration: none;
+    font-size: clamp(14px, 1.2vw, 20px);
+    font-weight: bold;
+    color: black;
+    padding: 10px 1vw;
+    margin: 0;
+}
+
+/* =================PHẦN  DANH SÁCH CÁC XE ======================= */
+.list-car {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.car {
+    cursor: pointer;
+    border: 1px solid black;
+    flex: 1 1 calc(33.33% - 20px);
+    box-sizing: border-box;
+    text-align: center;
+    padding: 10px;
+    min-width: 280px;
+}
+
+.img-car {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+
+
+@media (max-width: 1200px) {
+    .list-car .car:not(:first-child) {
+        display: none;
+
+    }
+
+    .list-car {
+        justify-content: center;
+
+    }
+
+    .car {
+        flex: 1 1 100%;
+
+    }
+
+}
+
+.list-car .car {
+    display: none;
+}
+
+.list-car .car.show-car {
+    display: block;
+}
+
+/* @media screen and (min-width: 1200px) {
+    .list-car .car:nth-child(n+4) {
+        display: none;
+    }
+
+
+} */
+
+
+
+/* nút chuyển trang  */
+.pagination {
+    margin: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.pagination button {
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.pagination button:hover,
+.pagination button:focus {
+    background-color: rgb(0, 255, 255);
+    color: rgb(91, 56, 90);
+}
+
+
+/* ====================TRANG TIN TỨC =============================== */
+.news {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.news-car {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    min-width: 260px;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.news-car img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.pagination2 {
+    margin: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.pagination2 button {
+    padding: 5px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.pagination2 button:hover,
+.pagination2 button:focus {
+    background-color: rgb(0, 255, 255);
+    color: rgb(91, 56, 90);
+}
+
+@media (max-width: 1200px) {
+    .news-car:not(:first-child) {
+        display: none;
+    }
+
+    .news {
+        justify-content: center;
+    }
+
+    .news-car {
+        flex: 1 1 50%;
+        max-width: 300px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .news .news-car:nth-child(n+4) {
+        display: none;
+    }
+}
+
+/* ============================PHẦN KẾT =========================== */
+footer {
+    padding: 30px;
+    border: 1px solid black;
+    margin-top: 40px;
+}
+
+
+/* ================================contact==================================== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+.wrap {
+    max-width: 1180px;
+    margin: 24px auto;
+    display: grid;
+    gap: 32px;
+    padding: 0 18px;
+    grid-template-columns: 1fr 320px;
+}
+
+.main-col h1 {
+    color: #e61f22;
+    font-size: 20px;
+    margin: 6px 0 18px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.card {
+    background: #f5f5f5;
+    padding: 22px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01) inset;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+}
+
+.col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: box-shadow .12s, border-color .12s;
+    color: #222;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: rgba(0, 0, 0, 0.14);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.full textarea,
+textarea#message {
+    min-height: 260px;
+    resize: vertical;
+}
+
+.send {
+    display: inline-block;
+    background: #e22125;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.06);
+}
+
+.send:active {
+    transform: translateY(1px);
+}
+
+.sidebar h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 18px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.new-list,
+.news-list {
+    background: #fff;
+    border-radius: 6px;
+    padding: 6px 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03) inset;
+}
+
+.news-item,
+.new-list .news-item {
+    padding: 16px 18px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 600;
+}
+
+.news-item a {
+    text-decoration: none;
+    color: #111;
+    display: block;
+}
+
+.news-item:last-child {
+    border-bottom: 0;
+}
+
+.sidebar>h3+.new-list {
+    margin-bottom: 18px;
+}
+
+@media (max-width: 920px) {
+    .wrap {
+        display: block;
+        padding: 0 14px;
+        max-width: 980px;
+        grid-template-columns: 1fr;
+    }
+
+    .main-col {
+        width: 100%;
+    }
+
+    .card {
+        margin-bottom: 22px;
+    }
+
+    .sidebar {
+        width: 100%;
+        margin-top: 14px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .full textarea {
+        min-height: 200px;
+    }
+}
+
+.invalid {
+    outline: 2px solid #ff6b6b;
+}
+
+@media print {
+
+    .send,
+    .sidebar {
+        display: none;
+    }
+
+    .wrap {
+        max-width: 100%;
+        margin: 0;
+    }
+}
