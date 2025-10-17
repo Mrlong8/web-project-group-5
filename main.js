@@ -9,15 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const html = await response.text();
             content.innerHTML = html;
 
+            // Xử lý sau khi load home
             if (url.includes("home.html")) {
-                // initPagination();
                 initSlideshow();
-                initIntroCar()
+                initIntroCar();
+                initScrollToNews();
+                testCar();
+                conTact();
             }
 
+            // Xử lý sau khi load product
             if (url.includes("product.html")) {
                 initMainCar();
+                initMainCarV1();
             }
+
+
 
         } catch (error) {
             content.innerHTML = `<p style="color:red;">Không tải được trang: ${url}</p>`;
@@ -26,11 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-
-
-
     // Mặc định load HOME trước
-    loadPage("./HOME/home.html");
+    if (!document.getElementById("content").innerHTML.trim()) {
+        loadPage("./HOME/home.html");
+    }
 
     // Khi click menu
     links.forEach(link => {
@@ -48,7 +54,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//============================== ĐIỀU CHỈNH ẨN HIỆN MENU====================================== 
+// ===============================ĐIỀU CHỈNH CHUYỂN TAB==========================
+window.loadPage = async function (url) {
+    const content = document.getElementById("content");
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        content.innerHTML = html;
+
+        // Xử lý sau khi load home
+        if (url.includes("home.html")) {
+            initSlideshow();
+            initIntroCar();
+            initScrollToNews();
+        }
+
+        // Xử lý sau khi load product
+        if (url.includes("product.html")) {
+            initMainCar();
+            initMainCarV1();
+        }
+    } catch (error) {
+        content.innerHTML = `<p style="color:red;">Không tải được trang: ${url}</p>`;
+        console.error("Lỗi khi tải trang:", error);
+    }
+};
+
+//============================== ĐIỀU CHỈNH ẨN HIỆN MENU======================================
 $(document).ready(() => {
     const $menu = $(".menu-head ul");
     const $btn = $("#btn");
@@ -78,7 +110,7 @@ $(document).ready(() => {
 
 
 // ==========================ĐIỀU CHỈNH DANH SÁCH XE ===================
-function initMainCar() {
+function initMainCarV1() {
     const carsContainer = document.querySelector(".list-car");
     if (!carsContainer) return;
 
@@ -243,120 +275,212 @@ function initSlideshow() {
     startAuto();
 }
 
-// ============================PRODUCT=======================
+// ===========================ẢNH OTO HOME=======================
+
+// Thêm vào cuối file main.js
 function initIntroCar() {
-    const container = document.getElementById("introCar");
-    if (!container) return;
+    const cars = document.querySelectorAll('.intro-car img');
+    const prev = document.getElementById('introPrev');
+    const next = document.getElementById('introNext');
+    let index = 0;
 
-    const imgs = Array.from(container.querySelectorAll("img"));
-    const prevBtn = document.getElementById("introPrev");
-    const nextBtn = document.getElementById("introNext");
-    if (!imgs.length) return;
+    function showCar(i) {
+        cars.forEach((img, idx) => {
+            img.classList.toggle('active', idx === i);
+        });
+    }
 
-    // PRELOAD hover images (tránh delay khi đổi)
-    const hoverCache = {};
-    imgs.forEach(img => {
-        const hoverSrc = img.dataset.hover;
-        if (hoverSrc) {
-            const im = new Image();
-            im.src = hoverSrc;
-            hoverCache[hoverSrc] = im;
+    prev?.addEventListener('click', () => {
+        index = (index - 1 + cars.length) % cars.length;
+        showCar(index);
+    });
+
+    next?.addEventListener('click', () => {
+        index = (index + 1) % cars.length;
+        showCar(index);
+    });
+}
+
+
+
+
+// =====================================tính năng sản phẩm=========================================================
+function initMainCar() {
+    const cars = document.querySelectorAll(".car");
+    const modal = document.getElementById("carDetailModal");
+    const closeBtn = modal.querySelector(".modal-close");
+    const compareBtn = document.getElementById("compareBtn");
+    const testDriveBtn = modal.querySelector(".test-drive");
+
+    let selectedCars = []; // lưu tạm 2 xe để so sánh
+
+    // Gán event click cho từng xe
+    cars.forEach(car => {
+        car.addEventListener("click", () => {
+            const imgSrc = car.querySelector("img").src;
+            const name = car.querySelector(".name-car").textContent;
+            const brand = car.dataset.brand;
+            const price = car.querySelector(".price").textContent;
+            const info = car.querySelector(".information").textContent;
+
+            const details = {
+                engine: info,
+                year: "2024",
+                gear: "Tự động 6 cấp",
+                color: "Trắng ngọc trai"
+            };
+
+            // Gán vào popup
+            document.getElementById("carDetailImg").src = imgSrc;
+            document.getElementById("carName").textContent = name;
+            document.getElementById("carBrand").textContent = brand;
+            document.getElementById("carEngine").textContent = details.engine;
+            document.getElementById("carPrice").textContent = price;
+            document.getElementById("carYear").textContent = details.year;
+            document.getElementById("carGear").textContent = details.gear;
+            document.getElementById("carColor").textContent = details.color;
+
+            // Lưu dữ liệu hiện tại vào đối tượng để dùng so sánh
+            modal.dataset.currentCar = JSON.stringify({
+                imgSrc, name, brand, price, info, ...details
+            });
+
+            modal.classList.remove("hidden");
+        });
+    });
+
+    // Đóng modal
+    closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.add("hidden");
+    });
+
+    // ==================== Nút đăng ký lái thử ====================
+    testDriveBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        // Giống cơ chế chuyển tab đã có
+        const content = document.getElementById("content");
+        loadPage("./CONTACT/contact.html");
+        modal.classList.add("hidden");
+    });
+
+    // ==================== Nút so sánh xe ====================
+    compareBtn.addEventListener("click", () => {
+        const currentCar = JSON.parse(modal.dataset.currentCar);
+        if (!currentCar) return;
+
+        // Nếu chưa đủ 2 xe thì thêm vào
+        if (selectedCars.length < 2) {
+            selectedCars.push(currentCar);
+            alert(`Đã chọn xe: ${currentCar.name}`);
+
+            // Nếu đủ 2 xe thì hiển thị popup so sánh
+            if (selectedCars.length === 2) {
+                showComparePopup(selectedCars);
+                selectedCars = []; // reset danh sách
+            }
         }
     });
 
-    let current = 0;
-    const total = imgs.length;
-    let interval = null;
-    const AUTO_MS = 3000;
+    // ==================== Hàm hiển thị popup so sánh ====================
+    function showComparePopup(cars) {
+        const popup = document.createElement("div");
+        popup.classList.add("modal");
+        popup.innerHTML = `
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <h2 style="text-align:center;">So sánh xe</h2>
+                <div class="compare-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                    ${cars.map(c => `
+                        <div class="compare-item" style="border:1px solid #ccc;padding:10px;border-radius:8px;">
+                            <img src="${c.imgSrc}" style="width:100%;height:auto;">
+                            <h3>${c.name}</h3>
+                            <p><strong>Hãng:</strong> ${c.brand}</p>
+                            <p><strong>Động cơ:</strong> ${c.engine}</p>
+                            <p><strong>Giá:</strong> ${c.price}</p>
+                            <p><strong>Năm:</strong> ${c.year}</p>
+                            <p><strong>Hộp số:</strong> ${c.gear}</p>
+                            <p><strong>Màu:</strong> ${c.color}</p>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        `;
+        document.body.appendChild(popup);
 
-    // init classes
-    imgs.forEach((i) => { i.classList.remove("active", "hovered"); i.style.opacity = ""; });
-    imgs[current].classList.add("active");
-
-    function showImage(index) {
-        if (index === current) return;
-        imgs[current].classList.remove("active", "hovered");
-        imgs[index].classList.add("active");
-        current = index;
-    }
-
-    function nextImage() { showImage((current + 1) % total); }
-    function prevImage() { showImage((current - 1 + total) % total); }
-
-    function startAuto() {
-        stopAuto();
-        interval = setInterval(nextImage, AUTO_MS);
-    }
-    function stopAuto() {
-        if (interval) { clearInterval(interval); interval = null; }
-    }
-
-    // navigation
-    if (nextBtn) nextBtn.addEventListener("click", () => { nextImage(); startAuto(); });
-    if (prevBtn) prevBtn.addEventListener("click", () => { prevImage(); startAuto(); });
-
-    // HOVER: swap to hover image FAST (preloaded) and add hovered class
-    imgs.forEach((img, idx) => {
-        const baseSrc = img.getAttribute("src");
-        const hoverSrc = img.dataset.hover;
-
-        img.addEventListener("mouseenter", () => {
-            stopAuto();
-            // nếu hoverSrc tồn tại và đã preload thì đổi src ngay
-            if (hoverSrc && hoverCache[hoverSrc] && hoverCache[hoverSrc].complete) {
-                img.setAttribute("src", hoverSrc);
-            } else if (hoverSrc) {
-                // nếu chưa preload hoàn toàn, tạo image tạm để load nhanh và swap khi xong
-                const tmp = new Image();
-                tmp.onload = () => { img.setAttribute("src", hoverSrc); };
-                tmp.src = hoverSrc;
-            }
-            // phóng to
-            img.classList.add("hovered");
-            // đồng bộ nếu rê chuột vào ảnh không phải ảnh active => chọn làm active
-            showImage(idx);
+        const close = popup.querySelector(".modal-close");
+        close.addEventListener("click", () => popup.remove());
+        popup.addEventListener("click", e => {
+            if (e.target === popup) popup.remove();
         });
+    }
+}
 
-        img.addEventListener("mouseleave", () => {
-            // trả ảnh về bản gốc (chỉ nếu data-hover tồn tại)
-            if (hoverSrc) {
-                // trả về bản base (tránh lấy src trước khi base biết)
-                img.setAttribute("src", baseSrc);
-            }
-            img.classList.remove("hovered");
-            startAuto();
+// =================================NÚT TRÊN ẢNH =========================
+function initScrollToNews() {
+    const newsSection = document.querySelector('.title-news');
+    if (!newsSection) return; // nếu chưa load thì thôi
+
+    const ctas = document.querySelectorAll('.cta');
+    ctas.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); // tránh hành vi mặc định
+            newsSection.scrollIntoView({ behavior: 'smooth' });
         });
     });
-
-    // Khi thay ảnh tự động, đảm bảo ảnh mới có src base (nếu trước đó đã hover đổi src)
-    // Vì khi tự chuyển, chúng ta muốn show bản base (không phải "y" nếu đã hover)
-    // Do đó, trước khi showImage, reset src của target thành base nếu cần
-    const baseSrcs = imgs.map(img => img.getAttribute("src")); // WARNING: if you changed src attr, this captures current src; so better store initial bases:
-    // Let's store original base srcs at init:
-    const originalBases = imgs.map(img => img.dataset.originalBase || img.getAttribute("src"));
-    // Ensure original stored
-    imgs.forEach((img, i) => { img.dataset.originalBase = originalBases[i]; });
-
-    // modify showImage to ensure base src
-    function showImage(index) {
-        if (index === current) return;
-        // ensure previous returns to base
-        const prevImg = imgs[current];
-        const prevBase = prevImg.dataset.originalBase;
-        if (prevBase) prevImg.setAttribute("src", prevBase);
-        prevImg.classList.remove("active", "hovered");
-
-        const nextImg = imgs[index];
-        const nextBase = nextImg.dataset.originalBase;
-        if (nextBase) nextImg.setAttribute("src", nextBase);
-        nextImg.classList.add("active");
-        current = index;
-    }
-
-    // start auto
-    startAuto();
-
-    // pause auto when mouse enters whole container (not just image)
-    container.addEventListener("mouseenter", stopAuto);
-    container.addEventListener("mouseleave", startAuto);
 }
+
+// ================= CONTACT FORM ==================
+function conTact() {
+    const form = document.querySelector(".main-col .card form");
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const fullname = document.getElementById("fullname").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!fullname || !phone || !email || !message) {
+            alert("Vui lòng điền đầy đủ các trường bắt buộc!");
+            return;
+        }
+
+        alert(`Cảm ơn ${fullname} đã gửi liên hệ!\nChúng tôi sẽ liên hệ bạn sớm.`);
+        form.reset();
+    });
+}
+
+// ================= TEST DRIVE FORM ==================
+function testCar() {
+    const form = document.getElementById("testDriveForm");
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const car = document.getElementById("car").value;
+        const date = document.getElementById("date").value;
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !phone || !car || !date) {
+            alert("Vui lòng điền đầy đủ các thông tin bắt buộc!");
+            return;
+        }
+
+        alert(`Cảm ơn ${name} đã đăng ký lái thử xe ${car}!\nChúng tôi sẽ liên hệ để xác nhận lịch.`);
+        form.reset();
+    });
+}
+
+// ================= DOM LOAD ==================
+document.addEventListener("DOMContentLoaded", () => {
+    conTact();
+    testCar();
+});
+

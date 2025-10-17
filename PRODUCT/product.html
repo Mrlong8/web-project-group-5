@@ -72,5 +72,32 @@
                 <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
             </div>
         </article>
+
+        <!-- POPUP THÔNG TIN XE -->
+        <div id="carDetailModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-left">
+                        <img id="carDetailImg" src="" alt="Car image">
+                    </div>
+                    <div class="modal-right">
+                        <h2 id="carName"></h2>
+                        <p><strong>Hãng:</strong> <span id="carBrand"></span></p>
+                        <p><strong>Động cơ:</strong> <span id="carEngine"></span></p>
+                        <p><strong>Giá:</strong> <span id="carPrice"></span></p>
+                        <p><strong>Năm sản xuất:</strong> <span id="carYear"></span></p>
+                        <p><strong>Hộp số:</strong> <span id="carGear"></span></p>
+                        <p><strong>Màu xe:</strong> <span id="carColor"></span></p>
+
+                        <div class="modal-actions">
+                            <a href="FEATURE/testcar.html" class="btn test-drive"> Đăng ký lái thử</a>
+                            <button id="compareBtn" class="btn compare"> So sánh</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 </main>
