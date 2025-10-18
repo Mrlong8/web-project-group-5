@@ -1,0 +1,28 @@
+{
+  "accounts": [
+    {
+      "id": "1",
+      "email": "abc@gmail.com",
+      "username": "user1",
+      "password": "pass1"
+    },
+    {
+      "id": "2",
+      "email": "abc@gmail.com",
+      "username": "user2",
+      "password": "pass2"
+    },
+    {
+      "id": "0f5a",
+      "fullname": "huuthanh",
+      "email": "suppo1999@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "3332",
+      "fullname": "huuthanh9",
+      "email": "abc1@gmail.com",
+      "password": "123456"
+    }
+  ]
+}
