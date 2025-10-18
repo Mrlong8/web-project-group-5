@@ -15,6 +15,7 @@ body {
 header {
     display: flex;
     justify-content: space-between;
+    /* ✅ căn logo trái, menu phải */
     align-items: center;
     border-bottom: 1px solid black;
     padding: 0px 20px;
@@ -25,10 +26,25 @@ header {
     z-index: 1000;
 }
 
+.long-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* ✅ đẩy menu và user về bên phải */
+    gap: 20px;
+    /* ✅ khoảng cách giữa menu và user icon */
+    flex: 1;
+    /* ✅ giúp nó chiếm phần còn lại để đẩy sát phải */
+}
+
+
+
 .logo-image img {
     max-width: 150px;
     height: auto;
 }
+
+
 
 /* Menu desktop */
 .menu-head ul {
@@ -71,15 +87,28 @@ header {
     padding-bottom: 8px;
 }
 
-/* Nút ☰ */
-.menu-head .btn {
-    display: none;
-    font-size: 30px;
-    color: black;
-    cursor: pointer;
+@media (max-width: 800px) {
+    .menu-head ul {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        inset: 0;
+        /* = top:0; left:0; right:0; bottom:0 → chiếm toàn màn hình */
+        background-color: rgba(255, 255, 255, 0.97);
+        z-index: 999;
+        gap: 25px;
+        animation: fadeIn 0.4s ease forwards;
+    }
+
+    .menu-head ul.show {
+        display: flex;
+        /* bật menu lên toàn màn hình */
+    }
 }
 
-/* =================== MOBILE =================== */
+
 @media (max-width: 800px) {
     .menu-head ul {
         display: none;
@@ -107,10 +136,18 @@ header {
         font-size: 20px;
     }
 
-    .menu-head .btn {
-        display: block;
-        position: relative;
+
+
+    /* ✅ Thêm hiệu ứng icon user khi mở menu */
+    .user-icon {
+        font-size: 28px;
+        cursor: pointer;
         z-index: 1001;
+    }
+
+    .user-icon.active i {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
     }
 
     @keyframes fadeIn {
@@ -126,6 +163,93 @@ header {
     }
 }
 
+/* ==================== USER ICON & OVERLAY ==================== */
+
+.user-icon {
+    /* position: fixed;
+    top: 15px;
+    right: 50px; */
+    /* 🔹 Tăng giá trị này để đẩy icon sang trái hoặc phải */
+    font-size: 32px;
+    color: #333;
+    cursor: pointer;
+    z-index: 2000;
+    /* đảm bảo nổi trên header */
+    transition: transform 0.2s ease;
+}
+
+.user-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Nền mờ toàn trang khi menu mở */
+.user-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 999;
+}
+
+/* Khi hiển thị menu */
+.user-overlay.active {
+    display: block;
+}
+
+/* Menu trượt bên phải */
+.user-menu {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    /* Ẩn ban đầu */
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+/* Khi mở thì trượt ra */
+.user-menu.active {
+    right: 0;
+}
+
+/* Nội dung menu */
+.user-menu h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #222;
+}
+
+.user-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-menu li {
+    margin: 15px 0;
+}
+
+.user-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.user-menu a:hover {
+    background: #f5f5f5;
+}
 
 /*============================================ INTRODUCE ===========================*/
 
@@ -415,117 +539,335 @@ main {
 
 /* ==========================PRODUCT================================ */
 
+/* ====== PRODUCT PAGE STYLE ====== */
 .main-car {
     max-width: 1200px;
-    margin: 100px auto 40px;
-    padding: 0 20px;
-    box-sizing: border-box;
+    margin: 60px auto;
+    padding: 20px;
+    animation: fadeIn 0.8s ease-in;
 }
 
 .title-main {
     text-align: center;
+    font-size: 2.2rem;
+    color: #c70000;
     margin-bottom: 30px;
-    font-size: 32px;
+    letter-spacing: 1px;
     font-weight: bold;
-    color: #222;
+    position: relative;
 }
 
+.title-main::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: #c70000;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* ====== MENU - FILTER ====== */
 .menu-main {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-bottom: 25px;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
 .search-car {
-    width: 100%;
     padding: 10px 15px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: 0.3s;
 }
 
-.filter-sort {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+.search-car:focus {
+    border-color: #c70000;
+    box-shadow: 0 0 5px #c70000;
 }
 
 .brand-filter {
     display: flex;
-    list-style: none;
     gap: 15px;
+    list-style: none;
     padding: 0;
-    margin: 0;
 }
 
 .brand-filter li a {
-    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
     color: #333;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: 0.3s;
+    background: #f5f5f5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
 }
 
-.brand-filter li a:hover,
-.brand-filter li a.active {
-    background-color: red;
-    color: white;
+.brand-filter li a.active,
+.brand-filter li a:hover {
+    background: #c70000;
+    color: #fff;
+}
+
+.sort-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .sort-buttons button {
-    background-color: #eee;
-    border: 1px solid #ccc;
-    padding: 6px 12px;
-    border-radius: 6px;
+    border: none;
+    background: #c70000;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
     cursor: pointer;
-    font-weight: bold;
-}
-
-.sort-buttons button:hover {
-    background-color: #ddd;
-}
-
-.list-car {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.car {
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
     transition: 0.3s;
 }
 
-.car:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.sort-buttons button:hover {
+    background: #a60000;
 }
 
-.img-car {
+/* ====== DANH SÁCH XE ====== */
+/* ===== LIST CAR CHUẨN 3 XE / HÀNG ===== */
+.list-car {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 xe 1 hàng */
+    gap: 25px;
+    width: 100%;
+    justify-items: center;
+    align-items: stretch;
+    margin-top: 30px;
+}
+
+/* ===== XE CÁ NHÂN ===== */
+.car {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 380px;
+    /* Giới hạn kích thước để đồng đều */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+}
+
+/* Xe hiển thị mượt hơn */
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.car:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(199, 0, 0, 0.3);
+}
+
+/* Ảnh xe */
+.car img {
     width: 100%;
     height: 200px;
     object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Tên xe, giá, thông tin */
+.name-car {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 5px;
 }
 
 .price {
-    color: red;
-    font-weight: bold;
+    color: #c70000;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
-@media (max-width: 800px) {
-    .filter-sort {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
+.information {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .list-car {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
+
+@media (max-width: 600px) {
+    .list-car {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====== MODAL POPUP ====== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+    z-index: 1000;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 800px;
+    width: 90%;
+    display: flex;
+    gap: 25px;
+    animation: popUp 0.4s ease;
+}
+
+.modal-left img {
+    width: 320px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.modal-right h2 {
+    color: #c70000;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.modal-right p {
+    margin: 6px 0;
+    color: #333;
+}
+
+.modal-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.modal-actions .btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.test-drive {
+    background: #c70000;
+    color: #fff;
+}
+
+.test-drive:hover {
+    background: #a60000;
+}
+
+.compare {
+    background: #444;
+    color: #fff;
+}
+
+.compare:hover {
+    background: #222;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: #c70000;
+    cursor: pointer;
+}
+
+/* ====== HIỆU ỨNG ====== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+    .list-car {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .modal-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .modal-left img {
+        width: 100%;
+    }
+}
+
 
 /* ====================TRANG TIN TỨC =============================== */
 .news {
@@ -615,147 +957,225 @@ footer {
     padding: 0 20px;
 }
 
-/* ================= CONTACT FORM ================= */
-.main-col .card form {
-    background-color: #fff;
-    padding: 35px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+/* ========== FORM ĐĂNG KÝ LÁI THỬ ========== */
+.testcar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #fff, #ffe6e6);
+    animation: fadeIn 1s ease;
 }
 
-.main-col .card h1 {
+#testDriveForm {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.15);
+    border-top: 5px solid #c8102e;
+    animation: slideUp 0.8s ease;
+}
+
+#testDriveForm h2 {
     text-align: center;
-    color: #0d47a1;
+    color: #c8102e;
     margin-bottom: 25px;
-    font-size: 22px;
+    font-size: 24px;
+    font-weight: 700;
 }
 
-.main-col .card .row {
+#testDriveForm .form-group {
+    margin-bottom: 18px;
+}
+
+#testDriveForm label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#testDriveForm input,
+#testDriveForm select,
+#testDriveForm textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+#testDriveForm input:focus,
+#testDriveForm select:focus,
+#testDriveForm textarea:focus {
+    border-color: #c8102e;
+    box-shadow: 0 0 8px rgba(200, 16, 46, 0.3);
+    transform: scale(1.02);
+}
+
+#testDriveForm button {
+    width: 100%;
+    padding: 12px;
+    background: #c8102e;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#testDriveForm button:hover {
+    background: #a10d24;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+}
+
+/* ========== FORM LIÊN HỆ ========== */
+.wrap {
+    background: #fff;
+    padding: 60px 20px;
+    margin-top: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.15);
+    animation: fadeIn 1s ease;
+}
+
+.main-col h1 {
+    color: #c8102e;
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.main-col h1::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 80px;
+    height: 3px;
+    background: #c8102e;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.card form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.row {
     display: flex;
     gap: 20px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
-.main-col .card .col {
+.col {
     flex: 1;
-    min-width: 200px;
+    min-width: 250px;
 }
 
-.main-col .card label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-    color: #333;
-}
-
-.main-col .card input,
-.main-col .card textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-.main-col .card input:focus,
-.main-col .card textarea:focus {
-    outline: none;
-    border-color: #d22819;
-    box-shadow: 0 0 6px rgba(247, 23, 23, 0.3);
-}
-
-.main-col .card button.send {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background-color: #fb2105;
-    color: #ffffff;
+label {
     font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.main-col .card button.send:hover {
-    background-color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    color: red;
-}
-
-/* ================= TEST DRIVE FORM ================= */
-.testcar #testDriveForm {
-    background-color: #fff;
-    padding: 35px 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.testcar h2 {
-    text-align: center;
-    color: #fe0000;
-    margin-bottom: 25px;
-    font-size: 22px;
-}
-
-.testcar .form-group {
-    margin-bottom: 18px;
-}
-
-.testcar label {
     display: block;
     margin-bottom: 6px;
-    font-weight: 600;
-    color: #333;
+    color: #444;
 }
 
-.testcar input,
-.testcar select,
-.testcar textarea {
+input,
+textarea {
     width: 100%;
     padding: 10px 14px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    border-radius: 8px;
+    border: 1px solid #ddd;
     font-size: 15px;
     transition: all 0.3s ease;
 }
 
-.testcar input:focus,
-.testcar select:focus,
-.testcar textarea:focus {
-    outline: none;
-    border-color: #d22c19;
-    box-shadow: 0 0 6px rgba(222, 14, 14, 0.579);
+input:focus,
+textarea:focus {
+    border-color: #c8102e;
+    box-shadow: 0 0 8px rgba(200, 16, 46, 0.3);
+    transform: scale(1.02);
 }
 
-.testcar button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background-color: #e61010;
+textarea {
+    resize: vertical;
+}
+
+.full {
+    margin-bottom: 20px;
+}
+
+button.send {
+    display: block;
+    margin: 0 auto;
+    padding: 12px 30px;
+    background: #c8102e;
     color: #fff;
-    font-weight: bold;
+    border: none;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.testcar button:hover {
-    background-color: #ffffff;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    color: #ff0000;
+button.send:hover {
+    background: #a10d24;
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(200, 16, 46, 0.4);
 }
 
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
+.required {
+    color: #c8102e;
+}
 
-    .main-col .card .row,
-    .testcar .form-group {
+/* ========== Hiệu ứng xuất hiện ========== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .row {
         flex-direction: column;
+    }
+
+    #testDriveForm {
+        padding: 25px;
+    }
+
+    .wrap {
+        padding: 40px 15px;
     }
 }

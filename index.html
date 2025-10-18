@@ -7,6 +7,8 @@
     <title>Car Dealer</title>
     <link rel="stylesheet" href="../INDEX/index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
 </head>
 
@@ -17,19 +19,43 @@
             <img src="./IMG/logo-toyota.jpg" alt="Logo">
         </div>
 
-        <nav class="menu-head" id="menu-head">
+        <div class="long-menu">
+            <nav class="menu-head" id="menu-head">
+                <ul>
+                    <li><a href="#" data-page="./HOME/home.html"><i class="fa fa-home"></i> HOME</a></li>
+                    <li><a href="#" data-page="./PRODUCT/product.html"><i class="fa fa-car"></i> PRODUCT</a></li>
+                    <li><a href="#" data-page="./CONTACT/contact.html"><i class="fa fa-envelope"></i> CONTACT</a></li>
+                    <li><a href="#" data-page="./NEWS/news.html"><i class="fa fa-newspaper"></i> NEWS</a></li>
+                    <li><a href="#" data-page="./LOGIN/login.html" class="login-btn"><i class="fa fa-user"></i>
+                            LOGIN</a>
+                    </li>
+                </ul>
+
+            </nav>
+            <!-- tình năng  -->
+            <div class="user-icon" id="userIcon">
+                <i class="fa fa-user-circle"></i>
+            </div>
+        </div>
+
+
+    </header>
+    <div class="user-overlay" id="userOverlay">
+        <div class="user-menu">
+            <h3>Tài khoản</h3>
             <ul>
                 <li><a href="#" data-page="./HOME/home.html"><i class="fa fa-home"></i> HOME</a></li>
                 <li><a href="#" data-page="./PRODUCT/product.html"><i class="fa fa-car"></i> PRODUCT</a></li>
                 <li><a href="#" data-page="./CONTACT/contact.html"><i class="fa fa-envelope"></i> CONTACT</a></li>
                 <li><a href="#" data-page="./NEWS/news.html"><i class="fa fa-newspaper"></i> NEWS</a></li>
-                <li><a href="#" data-page="./LOGIN/login.html" class="login-btn"><i class="fa fa-user"></i> LOGIN</a>
+                <li><a href="#" data-page="./FEATURE/shopcart.html"><i class="fa fa-shopping-cart"></i> SHOP CART</a>
                 </li>
+                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out-alt"></i> LOGOUT</a></li>
             </ul>
+        </div>
+    </div>
 
-            <div class="btn" id="btn">&#9776;</div>
-        </nav>
-    </header>
+
 
 
 
