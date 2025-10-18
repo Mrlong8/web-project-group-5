@@ -1,151 +1,165 @@
-<main id="main-content contact">
-    <!-- giói thiệu -->
+<html lang="en">
 
-    <div>
-        <!--        -->
-        <div class="introduce">
-            <section class="toyota-banner" id="toyotaBanner">
-                <div class="banner-track" id="bannerTrack">
-                    <!-- slides: lưu ý đường dẫn ảnh, sửa theo chỗ ảnh của bạn -->
-                    <div class="banner-slide">
-                        <img src="IMG/banner1.jpg" alt="banner1">
-                        <div class="banner-overlay">
-                            <div class="inner">
-                                <h1>KHÁM PHÁ DÒNG XE MỚI</h1>
-                                <a class="cta" href="#models">Xem chi tiết</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main id="main-content contact">
+        <!-- giói thiệu -->
+
+        <div>
+            <!--        -->
+            <div class="introduce">
+                <section class="toyota-banner" id="toyotaBanner">
+                    <div class="banner-track" id="bannerTrack">
+                        <!-- slides: lưu ý đường dẫn ảnh, sửa theo chỗ ảnh của bạn -->
+                        <div class="banner-slide">
+                            <img src="IMG/banner1.jpg" alt="banner1">
+                            <div class="banner-overlay">
+                                <div class="inner">
+                                    <h1>KHÁM PHÁ DÒNG XE MỚI</h1>
+                                    <a class="cta" href="#models">Xem chi tiết</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="banner-slide">
-                        <img src="INDEX/IMG/banner2.png" alt="banner2">
-                        <div class="banner-overlay">
-                            <div class="inner">
-                                <h1>ƯU ĐÃI ĐẶC BIỆT</h1>
-                                <a class="cta" href="#promo">Tìm hiểu</a>
+                        <div class="banner-slide">
+                            <img src="INDEX/IMG/banner2.png" alt="banner2">
+                            <div class="banner-overlay">
+                                <div class="inner">
+                                    <h1>ƯU ĐÃI ĐẶC BIỆT</h1>
+                                    <a class="cta" href="#promo">Tìm hiểu</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="banner-slide">
-                        <img src="INDEX/IMG/banner3.png" alt="banner3">
-                        <div class="banner-overlay">
-                            <div class="inner">
-                                <h1>CÔNG NGHỆ HYBRID</h1>
-                                <a class="cta" href="#tech">Khám phá</a>
+                        <div class="banner-slide">
+                            <img src="INDEX/IMG/banner3.png" alt="banner3">
+                            <div class="banner-overlay">
+                                <div class="inner">
+                                    <h1>CÔNG NGHỆ HYBRID</h1>
+                                    <a class="cta" href="#tech">Khám phá</a>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- clone của slide đầu để loop mượt (JS sẽ xử lý) -->
                     </div>
 
-                    <!-- clone của slide đầu để loop mượt (JS sẽ xử lý) -->
+                    <!-- nút prev / next -->
+                    <button class="banner-btn banner-prev" id="btnPrev" aria-label="Previous">&#10094;</button>
+                    <button class="banner-btn banner-next" id="btnNext" aria-label="Next">&#10095;</button>
+
+                    <!-- dots -->
+                    <div class="banner-dots" id="bannerDots" aria-hidden="false"></div>
+                </section>
+            </div>
+
+            <!-- gồm có list car ,  -->
+            <section class="main-car content">
+
+                <!-- Danh sách xe -->
+                <div class="intro-car" id="introCar">
+                    <img src="img/Z1.png" data-hover="img/Z1y.png" alt="Xe 1">
+                    <img src="img/Z2.png" data-hover="img/Z2y.png" alt="Xe 2">
+                    <img src="img/Z3.png" data-hover="img/Z3y.png" alt="Xe 3">
+                    <img src="img/Z4.png" data-hover="img/Z4y.png" alt="Xe 4">
+                    <img src="img/Z5.png" data-hover="img/Z5y.png" alt="Xe 5">
+
+                    <button class="intro-btn intro-prev" id="introPrev">‹</button>
+                    <button class="intro-btn intro-next" id="introNext">›</button>
                 </div>
 
-                <!-- nút prev / next -->
-                <button class="banner-btn banner-prev" id="btnPrev" aria-label="Previous">&#10094;</button>
-                <button class="banner-btn banner-next" id="btnNext" aria-label="Next">&#10095;</button>
 
-                <!-- dots -->
-                <div class="banner-dots" id="bannerDots" aria-hidden="false"></div>
+
+
+                <!-- tintuwcs liên quan  -->
+                <h1 class="title-news">NEWS </h1>
+                <article class="news">
+
+                    <div class="news-car">
+                        <img src=" IMG/xe1.png" alt="">
+                        <h3>Dịch vụ chăm sóc xe</h3>
+                        <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
+                            giá khởi điểm từ 49.700 USD
+                            Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
+                            góp mặt của Everest Sport Bi-Turbo 2026,..</p>
+
+                    </div>
+                    <div class="news-car">
+                        <img src=" IMG/xe1.png" alt="">
+                        <h3>Dịch vụ chăm sóc xe</h3>
+                        <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
+                            giá khởi điểm từ 49.700 USD
+                            Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
+                            góp mặt của Everest Sport Bi-Turbo 2026,..</p>
+                    </div>
+                    <div class="news-car">
+                        <img src=" IMG/xe1.png" alt="">
+                        <h3>Dịch vụ chăm sóc xe</h3>
+                        <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
+                            giá khởi điểm từ 49.700 USD
+                            Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
+                            góp mặt của Everest Sport Bi-Turbo 2026,..</p>
+                    </div>
+                </article>
+                <div class="pagination2">
+                    <button id="prevBtn2">⬅ Previous page</button>
+                    <button id="nextBtn2">Next page ➡</button>
+                </div>
+            </section>
+
+            <section class="content contact">
+                <div class="wrap">
+                    <div class="main-col">
+                        <h1>LIÊN HỆ VỚI AUTO</h1>
+
+                        <div class="card">
+                            <form action="">
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="fullname">Họ và tên<span class="required">*</span></label>
+                                        <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên"
+                                            required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="phone">Số điện thoại<span class="required">*</span></label>
+                                        <input type="text" id="phone" placeholder="Nhập số điện thoại">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="email">Email<span class="required">*</span></label>
+                                        <input type="text" id="email" name="email" placeholder="VD:abc@gmail.com"
+                                            required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="address">Địa chỉ</label>
+                                        <input type="text" id="address" name="address"
+                                            placeholder="Nhập địa chỉ của bạn" required>
+                                    </div>
+                                </div>
+
+                                <div class="full">
+                                    <label for="message">Nội dung <span class="required">*</span></label>
+                                    <textarea name="message" id="message"
+                                        placeholder="Viết nội dung liên hệ..."></textarea>
+                                </div>
+
+                                <button class="send" type="submit">Gửi đi</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </div>
+    </main>
+    <!--  -->
+</body>
 
-        <!-- gồm có list car ,  -->
-        <section class="main-car content">
-
-            <!-- Danh sách xe -->
-            <div class="intro-car" id="introCar">
-                <img src="img/Z1.png" data-hover="img/Z1y.png" alt="Xe 1">
-                <img src="img/Z2.png" data-hover="img/Z2y.png" alt="Xe 2">
-                <img src="img/Z3.png" data-hover="img/Z3y.png" alt="Xe 3">
-                <img src="img/Z4.png" data-hover="img/Z4y.png" alt="Xe 4">
-                <img src="img/Z5.png" data-hover="img/Z5y.png" alt="Xe 5">
-
-                <button class="intro-btn intro-prev" id="introPrev">‹</button>
-                <button class="intro-btn intro-next" id="introNext">›</button>
-            </div>
-
-
-
-
-            <!-- tintuwcs liên quan  -->
-            <h1 class="title-news">NEWS </h1>
-            <article class="news">
-
-                <div class="news-car">
-                    <img src=" IMG/xe1.png" alt="">
-                    <h3>Dịch vụ chăm sóc xe</h3>
-                    <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
-                        giá khởi điểm từ 49.700 USD
-                        Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
-                        góp mặt của Everest Sport Bi-Turbo 2026,..</p>
-
-                </div>
-                <div class="news-car">
-                    <img src=" IMG/xe1.png" alt="">
-                    <h3>Dịch vụ chăm sóc xe</h3>
-                    <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
-                        giá khởi điểm từ 49.700 USD
-                        Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
-                        góp mặt của Everest Sport Bi-Turbo 2026,..</p>
-                </div>
-                <div class="news-car">
-                    <img src=" IMG/xe1.png" alt="">
-                    <h3>Dịch vụ chăm sóc xe</h3>
-                    <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
-                        giá khởi điểm từ 49.700 USD
-                        Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
-                        góp mặt của Everest Sport Bi-Turbo 2026,..</p>
-                </div>
-            </article>
-            <div class="pagination2">
-                <button id="prevBtn2">⬅ Previous page</button>
-                <button id="nextBtn2">Next page ➡</button>
-            </div>
-        </section>
-
-        <section class="content contact">
-            <div class="wrap">
-                <div class="main-col">
-                    <h1>LIÊN HỆ VỚI AUTO</h1>
-
-                    <div class="card">
-                        <form action="">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="fullname">Họ và tên<span class="required">*</span></label>
-                                    <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên"
-                                        required>
-                                </div>
-                                <div class="col">
-                                    <label for="phone">Số điện thoại<span class="required">*</span></label>
-                                    <input type="text" id="phone" placeholder="Nhập số điện thoại">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="email">Email<span class="required">*</span></label>
-                                    <input type="text" id="email" name="email" placeholder="VD:abc@gmail.com" required>
-                                </div>
-                                <div class="col">
-                                    <label for="address">Địa chỉ</label>
-                                    <input type="text" id="address" name="address" placeholder="Nhập địa chỉ của bạn"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="full">
-                                <label for="message">Nội dung <span class="required">*</span></label>
-                                <textarea name="message" id="message" placeholder="Viết nội dung liên hệ..."></textarea>
-                            </div>
-
-                            <button class="send" type="submit">Gửi đi</button>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-    </div>
-</main>
-<!--  -->
+</html>

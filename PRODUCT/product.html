@@ -1,106 +1,119 @@
-<main id="main-content">
-    <section class="main-car content">
-        <h1 class="title-main">DISCOVER VEHICLE LINES</h1>
+<html lang="en">
 
-        <nav class="menu-main">
-            <input class="search-car" type="search" placeholder="Tìm kiếm xe...">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="product.css">
+</head>
 
-            <div class="filter-sort">
-                <ul class="brand-filter">
-                    <li><a href="#" data-brand="all" class="active">All</a></li>
-                    <li><a href="#" data-brand="Toyota">Toyota</a></li>
-                    <li><a href="#" data-brand="Honda">Honda</a></li>
-                    <li><a href="#" data-brand="Mazda">Mazda</a></li>
-                    <li><a href="#" data-brand="Vinfast">Vinfast</a></li>
-                </ul>
+<body>
+    <main id="main-content">
+        <section class="main-car content">
+            <h1 class="title-main">DISCOVER VEHICLE LINES</h1>
 
-                <div class="sort-buttons">
-                    <button id="sortAsc">Giá ↑</button>
-                    <button id="sortDesc">Giá ↓</button>
-                </div>
-            </div>
-        </nav>
+            <nav class="menu-main">
+                <input class="search-car" type="search" placeholder="Tìm kiếm xe...">
 
-        <!-- Danh sách xe -->
-        <article class="list-car">
-            <div class="car" data-brand="Toyota" data-price="430678000">
-                <img class="img-car" src="IMG/xe1.png" alt="">
-                <h1 class="name-car">Toyota Vios</h1>
-                <h2 class="price">430.678.000 VND</h2>
-                <p class="information">Động cơ: 1.5 | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Honda" data-price="520000000">
-                <img class="img-car" src="IMG/xe2.png" alt="">
-                <h1 class="name-car">Honda City</h1>
-                <h2 class="price">520.000.000 VND</h2>
-                <p class="information">Động cơ: 1.5 | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Mazda" data-price="640000000">
-                <img class="img-car" src="IMG/xe3.png" alt="">
-                <h1 class="name-car">Mazda CX-3</h1>
-                <h2 class="price">640.000.000 VND</h2>
-                <p class="information">Động cơ: 2.0 | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Mazda" data-price="340000000">
-                <img class="img-car" src="IMG/xe4.png" alt="">
-                <h1 class="name-car">Vinfast Lux A2.0</h1>
-                <h2 class="price">340.000.000 VND</h2>
-                <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Vinfast" data-price="670000000">
-                <img class="img-car" src="IMG/xe1.png" alt="">
-                <h1 class="name-car">Vinfast Lux A2.0</h1>
-                <h2 class="price">670.000.000 VND</h2>
-                <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Toyota" data-price="560000000">
-                <img class="img-car" src="IMG/xe4.png" alt="">
-                <h1 class="name-car">Vinfast Lux A2.0</h1>
-                <h2 class="price">560.000.000 VND</h2>
-                <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Vinfast" data-price="390000000">
-                <img class="img-car" src="IMG/xe4.png" alt="">
-                <h1 class="name-car">Vinfast Lux A2.0</h1>
-                <h2 class="price">390.000.000 VND</h2>
-                <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
-            </div>
-            <div class="car" data-brand="Honda" data-price="490000000">
-                <img class="img-car" src="IMG/xe4.png" alt="">
-                <h1 class="name-car">Vinfast Lux A2.0</h1>
-                <h2 class="price">490.000.000 VND</h2>
-                <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
-            </div>
-        </article>
+                <div class="filter-sort">
+                    <ul class="brand-filter">
+                        <li><a href="#" data-brand="all" class="active">All</a></li>
+                        <li><a href="#" data-brand="Toyota">Toyota</a></li>
+                        <li><a href="#" data-brand="Honda">Honda</a></li>
+                        <li><a href="#" data-brand="Mazda">Mazda</a></li>
+                        <li><a href="#" data-brand="Vinfast">Vinfast</a></li>
+                    </ul>
 
-        <!-- POPUP THÔNG TIN XE -->
-        <div id="carDetailModal" class="modal hidden">
-            <div class="modal-content">
-                <span class="modal-close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-left">
-                        <img id="carDetailImg" src="" alt="Car image">
+                    <div class="sort-buttons">
+                        <button id="sortAsc">Giá ↑</button>
+                        <button id="sortDesc">Giá ↓</button>
                     </div>
-                    <div class="modal-right">
-                        <h2 id="carName"></h2>
-                        <p><strong>Hãng:</strong> <span id="carBrand"></span></p>
-                        <p><strong>Động cơ:</strong> <span id="carEngine"></span></p>
-                        <p><strong>Giá:</strong> <span id="carPrice"></span></p>
-                        <p><strong>Năm sản xuất:</strong> <span id="carYear"></span></p>
-                        <p><strong>Hộp số:</strong> <span id="carGear"></span></p>
-                        <p><strong>Màu xe:</strong> <span id="carColor"></span></p>
+                </div>
+            </nav>
 
-                        <div class="modal-actions">
-                            <a href="FEATURE/testcar.html" class="btn test-drive">Đăng ký lái thử</a>
-                            <button id="compareBtn" class="btn compare">So sánh</button>
-                            <button id="addCartBtn" class="btn add-cart">Thêm vào giỏ hàng</button>
+            <!-- Danh sách xe -->
+            <article class="list-car">
+                <div class="car" data-brand="Toyota" data-price="430678000">
+                    <img class="img-car" src="IMG/xe1.png" alt="">
+                    <h1 class="name-car">Toyota Vios</h1>
+                    <h2 class="price">430.678.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Honda" data-price="520000000">
+                    <img class="img-car" src="IMG/xe2.png" alt="">
+                    <h1 class="name-car">Honda City</h1>
+                    <h2 class="price">520.000.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Mazda" data-price="640000000">
+                    <img class="img-car" src="IMG/xe3.png" alt="">
+                    <h1 class="name-car">Mazda CX-3</h1>
+                    <h2 class="price">640.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Mazda" data-price="340000000">
+                    <img class="img-car" src="IMG/xe4.png" alt="">
+                    <h1 class="name-car">Vinfast Lux A2.0</h1>
+                    <h2 class="price">340.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Vinfast" data-price="670000000">
+                    <img class="img-car" src="IMG/xe1.png" alt="">
+                    <h1 class="name-car">Vinfast Lux A2.0</h1>
+                    <h2 class="price">670.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Toyota" data-price="560000000">
+                    <img class="img-car" src="IMG/xe4.png" alt="">
+                    <h1 class="name-car">Vinfast Lux A2.0</h1>
+                    <h2 class="price">560.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Vinfast" data-price="390000000">
+                    <img class="img-car" src="IMG/xe4.png" alt="">
+                    <h1 class="name-car">Vinfast Lux A2.0</h1>
+                    <h2 class="price">390.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
+                </div>
+                <div class="car" data-brand="Honda" data-price="490000000">
+                    <img class="img-car" src="IMG/xe4.png" alt="">
+                    <h1 class="name-car">Vinfast Lux A2.0</h1>
+                    <h2 class="price">490.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 Turbo | 5 chỗ</p>
+                </div>
+            </article>
+
+            <!-- POPUP THÔNG TIN XE -->
+            <div id="carDetailModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="modal-close">&times;</span>
+                    <div class="modal-body">
+                        <div class="modal-left">
+                            <img id="carDetailImg" src="" alt="Car image">
+                        </div>
+                        <div class="modal-right">
+                            <h2 id="carName"></h2>
+                            <p><strong>Hãng:</strong> <span id="carBrand"></span></p>
+                            <p><strong>Động cơ:</strong> <span id="carEngine"></span></p>
+                            <p><strong>Giá:</strong> <span id="carPrice"></span></p>
+                            <p><strong>Năm sản xuất:</strong> <span id="carYear"></span></p>
+                            <p><strong>Hộp số:</strong> <span id="carGear"></span></p>
+                            <p><strong>Màu xe:</strong> <span id="carColor"></span></p>
+
+                            <div class="modal-actions">
+                                <a href="FEATURE/testcar.html" class="btn test-drive">Đăng ký lái thử</a>
+                                <button id="compareBtn" class="btn compare">So sánh</button>
+                                <button id="addCartBtn" class="btn add-cart">Thêm vào giỏ hàng</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 
 
-    </section>
-</main>
+        </section>
+    </main>
+</body>
+
+</html>

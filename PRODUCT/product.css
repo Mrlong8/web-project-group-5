@@ -1,0 +1,335 @@
+/* ==========================PRODUCT================================ */
+
+/* ====== PRODUCT PAGE STYLE ====== */
+.main-car {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    animation: fadeIn 0.8s ease-in;
+}
+
+.title-main {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #c70000;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    position: relative;
+}
+
+.title-main::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: #c70000;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* ====== MENU - FILTER ====== */
+.menu-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-car {
+    padding: 10px 15px;
+    width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-car:focus {
+    border-color: #c70000;
+    box-shadow: 0 0 5px #c70000;
+}
+
+.brand-filter {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+}
+
+.brand-filter li a {
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #333;
+    background: #f5f5f5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.brand-filter li a.active,
+.brand-filter li a:hover {
+    background: #c70000;
+    color: #fff;
+}
+
+.sort-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.sort-buttons button {
+    border: none;
+    background: #c70000;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sort-buttons button:hover {
+    background: #a60000;
+}
+
+/* ====== DANH SÁCH XE ====== */
+/* ===== LIST CAR CHUẨN 3 XE / HÀNG ===== */
+.list-car {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 xe 1 hàng */
+    gap: 25px;
+    width: 100%;
+    justify-items: center;
+    align-items: stretch;
+    margin-top: 30px;
+}
+
+/* ===== XE CÁ NHÂN ===== */
+.car {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    width: 100%;
+    max-width: 380px;
+    /* Giới hạn kích thước để đồng đều */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s ease forwards;
+}
+
+/* Xe hiển thị mượt hơn */
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.car:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(199, 0, 0, 0.3);
+}
+
+/* Ảnh xe */
+.car img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Tên xe, giá, thông tin */
+.name-car {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.price {
+    color: #c70000;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.information {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .list-car {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .list-car {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====== MODAL POPUP ====== */
+/* ====== MODAL CHI TIẾT XE ====== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 15px;
+    max-width: 900px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: popUp 0.4s ease;
+}
+
+.modal-body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-left img {
+    width: 100%;
+    max-width: 400px;
+    object-fit: contain;
+}
+
+.modal-right {
+    flex: 1;
+    padding: 25px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: red;
+}
+
+.modal-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.modal-actions .btn {
+    background: #c70000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.modal-actions .btn:hover {
+    background: #a60000;
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* ====== HIỆU ỨNG ====== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+    .list-car {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .modal-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .modal-left img {
+        width: 100%;
+    }
+}

@@ -1,0 +1,355 @@
+/* ========================== INTRO CAR (XE MỚI) ========================== */
+.intro-car {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    height: 420px;
+    /* hoặc 450px trước, bạn chỉnh */
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #000;
+    margin-bottom: 50px;
+}
+
+.intro-car img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.02);
+    transition: opacity 320ms ease, transform 420ms cubic-bezier(.22, .98, .36, 1);
+    will-change: opacity, transform;
+    border-radius: 12px;
+}
+
+/* ảnh đang hiển thị */
+.intro-car img.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* class khi hover (phóng to nhẹ) */
+.intro-car img.hovered {
+    transform: scale(1.08);
+    filter: brightness(1.08);
+}
+
+/* nút vuông */
+.intro-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 6px;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-prev {
+    left: 12px;
+}
+
+.intro-next {
+    right: 12px;
+}
+
+.intro-btn:hover {
+    background: #e21f26;
+    color: #fff;
+    transform: translateY(-50%) scale(1.06);
+}
+
+/* =================================PHẦN MENU HOME=============================== */
+main {
+    display: flex;
+    justify-content: center;
+    max-width: 1520px;
+    width: 95%;
+    margin: auto;
+
+}
+
+.content {
+    /* width: 90%; */
+    margin-top: 100px;
+}
+
+.main-car {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
+.menu-main ul {
+    display: flex;
+    gap: 1vw;
+    border-bottom: 1px solid black;
+    padding: 0;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100%;
+
+}
+
+.menu-main ul li {
+    list-style: none;
+    transition: 0.4s;
+    padding: 10px 1vw;
+    transition: 0.4s;
+}
+
+
+
+.menu-main ul li a {
+    text-decoration: none;
+    font-size: clamp(14px, 1.2vw, 20px);
+    font-weight: bold;
+    color: black;
+    padding: 10px 1vw;
+    margin: 0;
+}
+
+/*============================================ INTRODUCE ===========================*/
+
+.introduce {
+    margin-top: 100px;
+}
+
+/* đẩy nội dung xuống nếu header fixed */
+
+/* ---------- Banner container ---------- */
+.toyota-banner {
+    width: 100%;
+    /* chiều cao giống banner thương mại: 55-65vh */
+    height: 62vh;
+    min-height: 360px;
+    max-height: 800px;
+    overflow: hidden;
+    position: relative;
+    background: #000;
+}
+
+/* wrapper chứa các slide (gồm 1 clone để loop mượt) */
+.banner-track {
+    display: flex;
+    height: 100%;
+    transition: transform 900ms cubic-bezier(.22, .98, .36, 1);
+    will-change: transform;
+}
+
+.banner-slide {
+    flex: 0 0 100%;
+    position: relative;
+    height: 100%;
+}
+
+.banner-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* overlay chữ / button */
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    pointer-events: none;
+    /* để nút điều hướng vẫn hoạt động */
+}
+
+.banner-overlay .inner {
+    color: #fff;
+    max-width: 980px;
+    pointer-events: auto;
+    /* enable button inside overlay */
+}
+
+.banner-overlay h1 {
+    font-size: clamp(28px, 4vw, 48px);
+    margin-bottom: 16px;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+    letter-spacing: 0.4px;
+}
+
+.banner-overlay .cta {
+    display: inline-block;
+    background: #e21f26;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(226, 31, 38, 0.18);
+}
+
+/* prev / next buttons đè trên ảnh ở hai bên */
+.banner-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1100;
+    border: none;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: background .2s, transform .12s;
+}
+
+.banner-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%) scale(1.04);
+}
+
+.banner-prev {
+    left: 18px;
+}
+
+.banner-next {
+    right: 18px;
+}
+
+/* small devices: nút nhỏ hơn và overlay chữ nhỏ hơn */
+@media (max-width: 768px) {
+    .banner-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .banner-overlay h1 {
+        font-size: clamp(20px, 6vw, 28px);
+    }
+
+    .toyota-banner {
+        height: 48vh;
+        min-height: 260px;
+    }
+}
+
+/* optional: hide outline on button focus but keep accessibility visible via box-shadow */
+.banner-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(226, 31, 38, 0.18);
+}
+
+/* indicators (dots) */
+.banner-dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 18px;
+    display: flex;
+    gap: 10px;
+    z-index: 1200;
+}
+
+.banner-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+
+.banner-dot.active {
+    background: #fff;
+    transform: scale(1.15);
+}
+
+/* ====================TRANG TIN TỨC =============================== */
+.news {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.title-news {
+    margin-top: 50px;
+}
+
+.news-car {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    min-width: 260px;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.news-car img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.pagination2 {
+    margin: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.pagination2 button {
+    padding: 5px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.pagination2 button:hover,
+.pagination2 button:focus {
+    background-color: rgb(0, 255, 255);
+    color: rgb(91, 56, 90);
+}
+
+@media (max-width: 1200px) {
+    .news-car:not(:first-child) {
+        display: none;
+    }
+
+    .news {
+        justify-content: center;
+    }
+
+    .news-car {
+        flex: 1 1 50%;
+        max-width: 300px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .news .news-car:nth-child(n+4) {
+        display: none;
+    }
+}
