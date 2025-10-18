@@ -1,59 +1,63 @@
-function initMainCarV1() {
-    const carsContainer = document.querySelector(".list-car");
-    if (!carsContainer) return;
+const ProductPage = {
+    init() {
+        const carsContainer = document.querySelector(".list-car");
+        if (!carsContainer) return;
 
-    const cars = Array.from(carsContainer.querySelectorAll(".car"));
-    const searchInput = document.querySelector(".search-car");
-    const brandLinks = document.querySelectorAll(".brand-filter a");
-    const btnAsc = document.getElementById("sortAsc");
-    const btnDesc = document.getElementById("sortDesc");
+        const cars = Array.from(carsContainer.querySelectorAll(".car"));
+        const searchInput = document.querySelector(".search-car");
+        const brandLinks = document.querySelectorAll(".brand-filter a");
+        const btnAsc = document.getElementById("sortAsc");
+        const btnDesc = document.getElementById("sortDesc");
 
-    let filteredCars = [...cars];
-    let currentBrand = "all";
+        let filteredCars = [...cars];
+        let currentBrand = "all";
 
-    function renderCars(list) {
-        carsContainer.innerHTML = "";
-        list.forEach(car => carsContainer.appendChild(car));
-    }
+        function renderCars(list) {
+            carsContainer.innerHTML = "";
+            list.forEach(car => carsContainer.appendChild(car));
+        }
 
-    function filterCars() {
-        const searchValue = searchInput?.value.toLowerCase() || "";
-        filteredCars = cars.filter(car => {
-            const name = car.querySelector(".name-car").textContent.toLowerCase();
-            const brand = car.dataset.brand.toLowerCase();
-            return (
-                (currentBrand === "all" || brand === currentBrand) &&
-                name.includes(searchValue)
-            );
+        function filterCars() {
+            const searchValue = searchInput?.value.toLowerCase() || "";
+            filteredCars = cars.filter(car => {
+                const name = car.querySelector(".name-car").textContent.toLowerCase();
+                const brand = car.dataset.brand.toLowerCase();
+                return (
+                    (currentBrand === "all" || brand === currentBrand) &&
+                    name.includes(searchValue)
+                );
+            });
+            renderCars(filteredCars);
+        }
+
+        function sortCars(order = "asc") {
+            filteredCars.sort((a, b) => {
+                const priceA = parseInt(a.dataset.price);
+                const priceB = parseInt(b.dataset.price);
+                return order === "asc" ? priceA - priceB : priceB - priceA;
+            });
+            renderCars(filteredCars);
+        }
+
+        searchInput?.addEventListener("input", filterCars);
+        brandLinks.forEach(link => {
+            link.addEventListener("click", e => {
+                e.preventDefault();
+                brandLinks.forEach(l => l.classList.remove("active"));
+                link.classList.add("active");
+                currentBrand = link.dataset.brand.toLowerCase();
+                filterCars();
+            });
         });
-        renderCars(filteredCars);
+
+        btnAsc?.addEventListener("click", () => sortCars("asc"));
+        btnDesc?.addEventListener("click", () => sortCars("desc"));
+        filterCars();
+
+        console.log("✅ ProductPage.init() loaded");
     }
+};
 
-    function sortCars(order = "asc") {
-        filteredCars.sort((a, b) => {
-            const priceA = parseInt(a.dataset.price);
-            const priceB = parseInt(b.dataset.price);
-            return order === "asc" ? priceA - priceB : priceB - priceA;
-        });
-        renderCars(filteredCars);
-    }
-
-    searchInput?.addEventListener("input", filterCars);
-    brandLinks.forEach(link => {
-        link.addEventListener("click", e => {
-            e.preventDefault();
-            brandLinks.forEach(l => l.classList.remove("active"));
-            link.classList.add("active");
-            currentBrand = link.dataset.brand.toLowerCase();
-            filterCars();
-        });
-    });
-
-    btnAsc?.addEventListener("click", () => sortCars("asc"));
-    btnDesc?.addEventListener("click", () => sortCars("desc"));
-
-    filterCars();
-}
 
 // =============================== TÍNH NĂNG SẢN PHẨM ==========================
 
@@ -172,8 +176,3 @@ function initMainCarV1() {
 //     console.log("✅ initCarFeatures đã chạy!");
 // }
 
-
-document.addEventListener("DOMContentLoaded", () => {
-    initMainCarV1();
-    // initCarFeatures();
-});

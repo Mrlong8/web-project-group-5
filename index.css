@@ -1,52 +1,86 @@
-/* ===============================PHẦN MENU HEADER======================== */
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: auto;
-
-}
-
+/* =============================== PHẦN CHUNG =============================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* ================== HEADER ================== */
-header {
-    display: flex;
-    justify-content: space-between;
-    /* ✅ căn logo trái, menu phải */
-    align-items: center;
-    border-bottom: 1px solid black;
-    padding: 0px 20px;
-    width: 100%;
-    box-sizing: border-box;
-    position: fixed;
-    background-color: white;
-    z-index: 1000;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    color: #000;
+    overflow-x: hidden;
 }
 
+body {
+    animation: fadeBodyIn 0.8s ease forwards;
+}
+
+@keyframes fadeBodyIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =============================== HEADER =============================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 Thu nhỏ thanh menu */
+    height: 70px;
+    padding: 10px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* 🔹 Hiệu ứng xuất hiện khi load */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: headerFadeIn 0.8s ease forwards;
+}
+
+/* Logo */
+.logo-image img {
+    width: 110px;
+    /* 🔹 nhỏ gọn hơn */
+    height: auto;
+}
+
+/* Hiệu ứng khởi động */
+@keyframes headerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Vùng chứa menu và icon */
 .long-menu {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    /* ✅ đẩy menu và user về bên phải */
     gap: 20px;
-    /* ✅ khoảng cách giữa menu và user icon */
     flex: 1;
-    /* ✅ giúp nó chiếm phần còn lại để đẩy sát phải */
 }
 
-
-
-.logo-image img {
-    max-width: 150px;
-    height: auto;
-}
-
-
-
-/* Menu desktop */
+/* ================= MENU DESKTOP ================= */
 .menu-head ul {
     display: flex;
     flex-direction: row;
@@ -59,56 +93,35 @@ header {
 }
 
 .menu-head ul li a {
-    color: black;
+    color: #000;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
     transition: color 0.3s, border-bottom 0.3s;
-}
-
-.menu-head ul li a:hover {
-    color: rgb(227, 14, 14);
-    border-bottom: 2px solid red;
     padding-bottom: 5px;
 }
 
-/* Nút LOGIN */
+.menu-head ul li a:hover,
+.menu-head ul li a.active {
+    color: #e30e0e;
+    border-bottom: 2px solid red;
+}
+
+/* LOGIN button */
 .menu-head ul li a.login-btn {
     background: #e22125;
     color: #fff;
     padding: 8px 18px;
     border-radius: 6px;
     transition: background 0.3s;
+    border: none;
 }
 
 .menu-head ul li a.login-btn:hover {
     background: #e76f06;
-    border: none;
-    padding-bottom: 8px;
 }
 
-@media (max-width: 800px) {
-    .menu-head ul {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        inset: 0;
-        /* = top:0; left:0; right:0; bottom:0 → chiếm toàn màn hình */
-        background-color: rgba(255, 255, 255, 0.97);
-        z-index: 999;
-        gap: 25px;
-        animation: fadeIn 0.4s ease forwards;
-    }
-
-    .menu-head ul.show {
-        display: flex;
-        /* bật menu lên toàn màn hình */
-    }
-}
-
-
+/* ================= MENU MOBILE ================= */
 @media (max-width: 800px) {
     .menu-head ul {
         display: none;
@@ -136,20 +149,6 @@ header {
         font-size: 20px;
     }
 
-
-
-    /* ✅ Thêm hiệu ứng icon user khi mở menu */
-    .user-icon {
-        font-size: 28px;
-        cursor: pointer;
-        z-index: 1001;
-    }
-
-    .user-icon.active i {
-        transform: rotate(180deg);
-        transition: transform 0.3s ease;
-    }
-
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -163,18 +162,12 @@ header {
     }
 }
 
-/* ==================== USER ICON & OVERLAY ==================== */
-
+/* ================= USER ICON & OVERLAY ================= */
 .user-icon {
-    /* position: fixed;
-    top: 15px;
-    right: 50px; */
-    /* 🔹 Tăng giá trị này để đẩy icon sang trái hoặc phải */
     font-size: 32px;
     color: #333;
     cursor: pointer;
     z-index: 2000;
-    /* đảm bảo nổi trên header */
     transition: transform 0.2s ease;
 }
 
@@ -182,7 +175,7 @@ header {
     transform: scale(1.1);
 }
 
-/* Nền mờ toàn trang khi menu mở */
+/* Overlay nền tối */
 .user-overlay {
     position: fixed;
     inset: 0;
@@ -192,17 +185,15 @@ header {
     z-index: 999;
 }
 
-/* Khi hiển thị menu */
 .user-overlay.active {
     display: block;
 }
 
-/* Menu trượt bên phải */
+/* Menu người dùng */
 .user-menu {
     position: fixed;
     top: 0;
     right: -280px;
-    /* Ẩn ban đầu */
     width: 280px;
     height: 100vh;
     background: #fff;
@@ -212,12 +203,10 @@ header {
     z-index: 1000;
 }
 
-/* Khi mở thì trượt ra */
 .user-menu.active {
     right: 0;
 }
 
-/* Nội dung menu */
 .user-menu h3 {
     text-align: center;
     margin-bottom: 20px;
@@ -227,8 +216,6 @@ header {
 
 .user-menu ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
 .user-menu li {
@@ -251,24 +238,25 @@ header {
     background: #f5f5f5;
 }
 
-
-
-
-
-
-
-/* ============================PHẦN KẾT =========================== */
-footer {
-    padding: 30px;
-    border: 1px solid black;
-    margin-top: 40px;
+/* ================= MAIN & FOOTER ================= */
+main {
+    margin-top: 120px;
+    /* tránh header che nội dung */
+    padding: 0 20px;
+    min-height: 80vh;
 }
-
-/* ================= GENERAL ================= */
-
 
 .content {
     max-width: 1100px;
-    margin: 120px auto 50px;
-    padding: 0 20px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    padding: 30px;
+    border-top: 1px solid #ddd;
+    margin-top: 60px;
+    text-align: center;
+    font-size: 15px;
+    color: #444;
 }
