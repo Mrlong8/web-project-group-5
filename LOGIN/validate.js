@@ -1,4 +1,5 @@
 var accAPI = "http://localhost:3000/accounts";
+window.activeLogin = false;
 function Validate(rule, inputElement, errorElement, selectorRules) {
     var errorMessage;
     var rules = selectorRules[rule.selector];
@@ -160,8 +161,9 @@ Validator({
                     return acc.email === email && acc.password === password;
                 });
                 if (user) {
+                    
                     alert('Đăng nhập thành công!');
-                    // ví dụ: chuyển hướng sau khi đăng nhập
+                    localStorage.removeItem('activeLogin');
                     window.location.href = '../index.html';
                 } else {
                     alert('Email hoặc mật khẩu không chính xác.');

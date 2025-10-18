@@ -1,7 +1,20 @@
+window.updateAuthUI = function () {
+    const loginBtn = document.getElementById("loginBtn");
+    const userIcon = document.getElementById("userIcon");
+
+    // đọc trạng thái từ localStorage (an toàn khi dùng module)
+    const logged = localStorage.getItem('activeLogin');
+
+    if (loginBtn) loginBtn.style.display = logged ? '' : 'none';
+    if (userIcon) userIcon.style.display = logged ? 'none' : '';
+};
+
 // =============================== CHUYỂN TAB ==========================
 document.addEventListener("DOMContentLoaded", () => {
+    window.updateAuthUI();
+
     const content = document.getElementById("content");
-    const links = document.querySelectorAll(".menu-head a");
+    const links = document.querySelectorAll(".menu-head a[data-page]");
 
     async function loadPage(url) {
         try {
@@ -52,7 +65,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 👤 Khởi tạo menu người dùng
     initUserMenu(loadPage);
+
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'activeLogin') {
+            window.updateAuthUI();
+        }
+    });
 });
+
+//handle login button
 
 // =============================== MENU USER ==========================
 function initUserMenu(loadPage) {
@@ -85,8 +106,10 @@ function initUserMenu(loadPage) {
     });
 
     logoutBtn?.addEventListener("click", () => {
+        localStorage.setItem('activeLogin', '1');
         alert("Đã đăng xuất!");
         userOverlay.classList.remove("active");
         userMenu.classList.remove("active");
+        window.updateAuthUI();
     });
 }
