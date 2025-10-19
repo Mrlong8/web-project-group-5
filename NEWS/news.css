@@ -274,3 +274,21 @@
     pointer-events: auto;
     transform: translateY(0);
 }
+
+/* Khi trong chế độ chỉnh sửa, show panel bên trái */
+#content.edit-mode .list-car {
+    margin-left: 200px;
+    /* chừa chỗ cho panel */
+}
+
+.edit-panel {
+    position: absolute;
+    left: 20px;
+    top: 120px;
+    width: 160px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}

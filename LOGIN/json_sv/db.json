@@ -23,6 +23,18 @@
       "fullname": "huuthanh9",
       "email": "abc1@gmail.com",
       "password": "123456"
+    },
+    {
+      "id": "eba0",
+      "fullname": "long",
+      "email": "xuanlong1806@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "b12d",
+      "fullname": "long",
+      "email": "xuanlong1806@gmail.com",
+      "password": "123456"
     }
   ]
 }

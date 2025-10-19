@@ -9,6 +9,8 @@ window.updateAuthUI = function () {
     if (userIcon) userIcon.style.display = logged ? 'none' : '';
 };
 
+
+
 // =============================== CHUYỂN TAB ==========================
 document.addEventListener("DOMContentLoaded", () => {
     window.updateAuthUI();
@@ -16,39 +18,65 @@ document.addEventListener("DOMContentLoaded", () => {
     const content = document.getElementById("content");
     const links = document.querySelectorAll(".menu-head a[data-page]");
 
+    // (Trong đoạn DOMContentLoaded của main.js) — thay phần loadPage hiện tại bằng đoạn sau
     async function loadPage(url) {
         try {
-            // 🧭 Xác định tên trang (HOME / PRODUCT / CONTACT / NEWS)
+            const content = document.getElementById("content");
             const pageFolder = url.split("/")[1]?.toUpperCase() || "HOME";
-            const cssFile = `../${pageFolder}/${pageFolder.toLowerCase()}.css`;
+            const baseName = url.split("/")[2]?.split(".")[0] || "home";
 
-            // 🧹 Xóa CSS trang cũ (nếu có)
+            // Xóa CSS cũ
             const existingLink = document.getElementById("page-style");
             if (existingLink) existingLink.remove();
 
-            // 📥 Tải nội dung HTML
+            // Load HTML
             const response = await fetch(url);
             const html = await response.text();
             content.innerHTML = html;
 
-            // 🎨 Thêm CSS tương ứng
+            // Load CSS tương ứng
+            const cssFile = `../${pageFolder}/${baseName}.css`;
             const css = document.createElement("link");
             css.rel = "stylesheet";
             css.href = cssFile;
             css.id = "page-style";
             document.head.appendChild(css);
 
-            // 🚀 Gọi module tương ứng
-            if (pageFolder === "PRODUCT") ProductPage?.init?.();
-            else if (pageFolder === "NEWS") NewsPage?.init?.();
-            else if (pageFolder === "CONTACT") ContactPage?.init?.();
-            else if (pageFolder === "HOME") HomePage?.init?.();
+            // Xóa JS cũ
+            const existingScript = document.getElementById("page-script");
+            if (existingScript) existingScript.remove();
+
+            // Load JS tương ứng
+            const jsFile = `../${pageFolder}/${baseName}.js`;
+            const script = document.createElement("script");
+            script.src = jsFile;
+            script.id = "page-script";
+            document.body.appendChild(script);
+
+            // Khi script load xong thì gọi init
+            script.onload = () => {
+                if (pageFolder === "PRODUCT" && window.ProductPage) ProductPage.init();
+                else if (pageFolder === "NEWS" && window.NewsPage) NewsPage.init();
+                else if (pageFolder === "CONTACT" && window.ContactPage) ContactPage.init();
+                else if (pageFolder === "HOME" && window.HomePage) HomePage.init();
+                else if (pageFolder === "FEATURE") {
+                    if (url.includes("shopcart") && window.ShopCartPage) ShopCartPage.init();
+                    if (url.includes("buy") && window.BuyPage) BuyPage.init();
+                }
+            };
+
+            window.currentPage = pageFolder;
+            window.loadPage = loadPage;
 
         } catch (error) {
             console.error("❌ Lỗi khi tải trang:", error);
-            content.innerHTML = `<p style="color:red;">Không tải được trang: ${url}</p>`;
+            document.getElementById("content").innerHTML = `<p style="color:red;">Không tải được trang: ${url}</p>`;
         }
     }
+
+    // expose globally (in case above didn't run)
+    window.loadPage = window.loadPage || loadPage;
+
 
     // 🏠 Tải mặc định trang HOME khi mở web
     if (!content.innerHTML.trim()) loadPage("./HOME/home.html");
@@ -82,6 +110,24 @@ function initUserMenu(loadPage) {
     const userMenu = document.querySelector(".user-menu");
     const logoutBtn = document.getElementById("logoutBtn");
 
+    // 🧩 Thêm nút Edit vào menu người dùng
+    if (userMenu && !document.getElementById("editBtn")) {
+        const editBtn = document.createElement("button");
+        editBtn.id = "editBtn";
+        editBtn.textContent = "Edit";
+        editBtn.style.background = "#d62828";
+        editBtn.style.color = "#fff";
+        editBtn.style.border = "none";
+        editBtn.style.padding = "8px 16px";
+        editBtn.style.margin = "10px auto";
+        editBtn.style.borderRadius = "8px";
+        editBtn.style.display = "block";
+        editBtn.style.cursor = "pointer";
+        editBtn.style.width = "80%";
+        userMenu.appendChild(editBtn);
+    }
+
+
     if (!userIcon || !userOverlay || !userMenu) return;
 
     userIcon.addEventListener("click", () => {
@@ -113,3 +159,19 @@ function initUserMenu(loadPage) {
         window.updateAuthUI();
     });
 }
+// Edit button behavior
+document.addEventListener('click', (e) => {
+    if (e.target.closest('#editBtn')) {
+        const page = window.currentPage || 'HOME';
+        if (page === 'PRODUCT' || page === 'NEWS') {
+            // bật/tắt chế độ edit bằng class trên #content
+            const contentEl = document.getElementById('content');
+            contentEl.classList.toggle('edit-mode');
+            alert('Chế độ chỉnh sửa: ' + (contentEl.classList.contains('edit-mode') ? 'BẬT' : 'TẮT'));
+            // pages PRODUCT/NEWS cần lắng nghe class edit-mode để hiển thị UI thêm/xóa/sửa
+        } else {
+            alert('Chức năng này không áp dụng cho trang này.');
+        }
+    }
+});
+

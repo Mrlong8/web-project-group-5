@@ -9,14 +9,41 @@ const ProductPage = {
         const btnAsc = document.getElementById("sortAsc");
         const btnDesc = document.getElementById("sortDesc");
 
+        const modal = document.getElementById("carDetailModal");
+        const closeModal = modal.querySelector(".modal-close");
+        const imgDetail = document.getElementById("carDetailImg");
+        const nameDetail = document.getElementById("carName");
+        const brandDetail = document.getElementById("carBrand");
+        const engineDetail = document.getElementById("carEngine");
+        const priceDetail = document.getElementById("carPrice");
+        const yearDetail = document.getElementById("carYear");
+        const gearDetail = document.getElementById("carGear");
+        const colorDetail = document.getElementById("carColor");
+        const btnBuy = modal.querySelector(".test-drive");
+        const btnCart = modal.querySelector(".add-cart");
+        const editControls = document.querySelector(".edit-controls");
+
         let filteredCars = [...cars];
         let currentBrand = "all";
+        let currentCar = null;
 
+        // ==================== Hiển thị danh sách ====================
         function renderCars(list) {
             carsContainer.innerHTML = "";
             list.forEach(car => carsContainer.appendChild(car));
+            attachViewMoreEvents();
         }
 
+        function attachViewMoreEvents() {
+            carsContainer.querySelectorAll(".view-more").forEach(btn => {
+                btn.onclick = e => {
+                    const car = e.target.closest(".car");
+                    openModal(car);
+                };
+            });
+        }
+
+        // ==================== Lọc - Tìm kiếm ====================
         function filterCars() {
             const searchValue = searchInput?.value.toLowerCase() || "";
             filteredCars = cars.filter(car => {
@@ -30,6 +57,7 @@ const ProductPage = {
             renderCars(filteredCars);
         }
 
+        // ==================== Sắp xếp ====================
         function sortCars(order = "asc") {
             filteredCars.sort((a, b) => {
                 const priceA = parseInt(a.dataset.price);
@@ -38,6 +66,44 @@ const ProductPage = {
             });
             renderCars(filteredCars);
         }
+
+        // ==================== Modal ====================
+        function openModal(car) {
+            modal.classList.remove("hidden");
+            currentCar = car;
+
+            imgDetail.src = car.querySelector("img").src;
+            nameDetail.textContent = car.querySelector(".name-car").textContent;
+            brandDetail.textContent = car.dataset.brand;
+            engineDetail.textContent = car.querySelector(".information").textContent;
+            priceDetail.textContent = car.querySelector(".price").textContent;
+            yearDetail.textContent = "2024";
+            gearDetail.textContent = "Tự động";
+            colorDetail.textContent = "Đỏ";
+        }
+
+        function closeModalFn() {
+            modal.classList.add("hidden");
+        }
+
+        // ==================== Event ====================
+        closeModal.addEventListener("click", closeModalFn);
+        modal.addEventListener("click", e => { if (e.target === modal) closeModalFn(); });
+        btnBuy.addEventListener("click", () => {
+            if (!currentCar) return;
+            const data = getCarData(currentCar);
+            localStorage.setItem("selectedCar", JSON.stringify(data));
+            window.location.href = "../FEATURE/buy.html";
+        });
+
+        btnCart.addEventListener("click", () => {
+            if (!currentCar) return;
+            const data = getCarData(currentCar);
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push(data);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert("✅ Đã thêm vào giỏ hàng!");
+        });
 
         searchInput?.addEventListener("input", filterCars);
         brandLinks.forEach(link => {
@@ -52,127 +118,126 @@ const ProductPage = {
 
         btnAsc?.addEventListener("click", () => sortCars("asc"));
         btnDesc?.addEventListener("click", () => sortCars("desc"));
+
         filterCars();
+        attachViewMoreEvents();
+
+        // ==================== Theo dõi Edit Mode ====================
+        const observer = new MutationObserver(() => {
+            if (document.getElementById("content").classList.contains("edit-mode"))
+                editControls.classList.remove("hidden");
+            else editControls.classList.add("hidden");
+        });
+        observer.observe(document.getElementById("content"), { attributes: true, attributeFilter: ["class"] });
 
         console.log("✅ ProductPage.init() loaded");
     }
 };
 
+function getCarData(car) {
+    return {
+        name: car.querySelector(".name-car").textContent,
+        brand: car.dataset.brand,
+        price: parseInt(car.dataset.price),
+        img: car.querySelector("img").src,
+        info: car.querySelector(".information").textContent,
+        year: "2024",
+        gear: "Tự động",
+        color: "Đỏ"
+    };
+}
 
-// =============================== TÍNH NĂNG SẢN PHẨM ==========================
+// ====== CHẾ ĐỘ EDIT (THÊM / SỬA / XÓA) ======
+function initEditMode() {
+    const carsContainer = document.querySelector(".list-car");
+    if (!carsContainer) return;
 
-// function initCarFeatures() {
-//     const cars = document.querySelectorAll(".car");
-//     const modal = document.getElementById("carDetailModal");
+    // Nút thêm xe khi bật edit
+    let addBtn = document.querySelector(".add-car-btn");
+    if (!addBtn) {
+        addBtn = document.createElement("button");
+        addBtn.className = "add-car-btn";
+        addBtn.textContent = "➕ Thêm xe mới";
+        carsContainer.before(addBtn);
+    }
 
-//     if (!cars.length || !modal) return; // nếu không có xe hoặc modal, thoát luôn
+    function refreshEditButtons() {
+        document.querySelectorAll(".car").forEach(car => {
+            let controls = car.querySelector(".edit-controls");
+            if (!controls) {
+                controls = document.createElement("div");
+                controls.className = "edit-controls";
+                controls.innerHTML = `
+          <button class="edit-btn edit-car">Sửa</button>
+          <button class="edit-btn delete-car">Xóa</button>
+        `;
+                car.appendChild(controls);
+            }
+        });
+    }
 
-//     const closeBtn = modal.querySelector(".modal-close");
-//     const compareBtn = document.getElementById("compareBtn");
-//     const testDriveBtn = modal.querySelector(".test-drive");
-//     const addCartBtn = document.getElementById("addCartBtn");
-//     let selectedCars = [];
+    refreshEditButtons();
 
-//     // 1️⃣ Click vào xe -> mở modal
-//     cars.forEach(car => {
-//         car.addEventListener("click", () => {
-//             const imgSrc = car.querySelector("img")?.src || "";
-//             const name = car.querySelector(".name-car")?.textContent || "";
-//             const brand = car.dataset.brand || "";
-//             const price = parseInt(car.dataset.price) || 0;
-//             const info = car.querySelector(".information")?.textContent || "";
+    // ===== XỬ LÝ SỰ KIỆN =====
+    addBtn.addEventListener("click", () => {
+        const name = prompt("Tên xe:");
+        const brand = prompt("Hãng xe:");
+        const price = prompt("Giá (VND):");
+        const info = prompt("Thông tin động cơ:");
 
-//             const details = {
-//                 engine: info,
-//                 year: "2024",
-//                 gear: "Tự động 6 cấp",
-//                 color: "Trắng / Đen / Đỏ"
-//             };
+        if (!name || !brand || !price) return alert("Thiếu thông tin!");
 
-//             document.getElementById("carDetailImg").src = imgSrc;
-//             document.getElementById("carName").textContent = name;
-//             document.getElementById("carBrand").textContent = brand;
-//             document.getElementById("carEngine").textContent = details.engine;
-//             document.getElementById("carPrice").textContent = price.toLocaleString("vi-VN") + " VND";
-//             document.getElementById("carYear").textContent = details.year;
-//             document.getElementById("carGear").textContent = details.gear;
-//             document.getElementById("carColor").textContent = details.color;
+        const car = document.createElement("div");
+        car.className = "car";
+        car.dataset.brand = brand;
+        car.dataset.price = price;
+        car.innerHTML = `
+      <img class="img-car" src="IMG/xe1.png" alt="">
+      <h1 class="name-car">${name}</h1>
+      <h2 class="price">${parseInt(price).toLocaleString()} VND</h2>
+      <p class="information">${info}</p>
+      <div class="edit-controls">
+        <button class="edit-btn edit-car">Sửa</button>
+        <button class="edit-btn delete-car">Xóa</button>
+      </div>
+    `;
+        carsContainer.appendChild(car);
 
-//             modal.dataset.currentCar = JSON.stringify({ imgSrc, name, brand, price, ...details });
-//             modal.classList.remove("hidden");
-//         });
-//     });
+        // gắn lại sự kiện click xe
+        car.addEventListener("click", () => ProductPage.init());
+        alert("✅ Đã thêm xe mới!");
+    });
 
-//     // 2️⃣ Đóng modal
-//     closeBtn?.addEventListener("click", () => modal.classList.add("hidden"));
-//     modal.addEventListener("click", e => {
-//         if (e.target === modal) modal.classList.add("hidden");
-//     });
+    carsContainer.addEventListener("click", e => {
+        if (e.target.classList.contains("delete-car")) {
+            e.stopPropagation();
+            const car = e.target.closest(".car");
+            car.remove();
+        }
+        if (e.target.classList.contains("edit-car")) {
+            e.stopPropagation();
+            const car = e.target.closest(".car");
+            const newName = prompt("Tên xe:", car.querySelector(".name-car").textContent);
+            const newPrice = prompt("Giá mới:", car.dataset.price);
+            if (newName) car.querySelector(".name-car").textContent = newName;
+            if (newPrice) {
+                car.dataset.price = newPrice;
+                car.querySelector(".price").textContent = parseInt(newPrice).toLocaleString() + " VND";
+            }
+        }
+    });
 
-//     // 3️⃣ Đăng ký lái thử
-//     testDriveBtn?.addEventListener("click", e => {
-//         e.preventDefault();
-//         if (typeof loadPage === "function") loadPage("./CONTACT/contact.html");
-//         modal.classList.add("hidden");
-//     });
-
-//     // 4️⃣ So sánh xe
-//     compareBtn?.addEventListener("click", () => {
-//         const currentCar = JSON.parse(modal.dataset.currentCar || null);
-//         if (!currentCar) return;
-
-//         selectedCars.push(currentCar);
-//         alert(`✅ Đã chọn xe: ${currentCar.name}`);
-
-//         if (selectedCars.length === 2) {
-//             showComparePopup(selectedCars);
-//             selectedCars = [];
-//         }
-//     });
-
-//     function showComparePopup(cars) {
-//         const popup = document.createElement("div");
-//         popup.classList.add("modal");
-//         popup.innerHTML = `
-//             <div class="modal-content">
-//                 <span class="modal-close">&times;</span>
-//                 <h2 style="text-align:center;">So sánh xe</h2>
-//                 <div class="compare-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-//                     ${cars.map(c => `
-//                         <div class="compare-item" style="border:1px solid #ccc;padding:10px;border-radius:8px;">
-//                             <img src="${c.imgSrc}" style="width:100%;height:auto;">
-//                             <h3>${c.name}</h3>
-//                             <p><strong>Hãng:</strong> ${c.brand}</p>
-//                             <p><strong>Động cơ:</strong> ${c.engine}</p>
-//                             <p><strong>Giá:</strong> ${c.price.toLocaleString("vi-VN")} VND</p>
-//                             <p><strong>Năm:</strong> ${c.year}</p>
-//                             <p><strong>Hộp số:</strong> ${c.gear}</p>
-//                             <p><strong>Màu:</strong> ${c.color}</p>
-//                         </div>
-//                     `).join("")}
-//                 </div>
-//             </div>
-//         `;
-//         document.body.appendChild(popup);
-
-//         const close = popup.querySelector(".modal-close");
-//         close?.addEventListener("click", () => popup.remove());
-//         popup.addEventListener("click", e => {
-//             if (e.target === popup) popup.remove();
-//         });
-//     }
-
-//     // 5️⃣ Thêm vào giỏ hàng
-//     addCartBtn?.addEventListener("click", () => {
-//         const currentCar = JSON.parse(modal.dataset.currentCar || null);
-//         if (!currentCar) return;
-
-//         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-//         cart.push(currentCar);
-//         localStorage.setItem("cart", JSON.stringify(cart));
-//         alert(`✅ Đã thêm "${currentCar.name}" vào giỏ hàng!`);
-//     });
-
-//     console.log("✅ initCarFeatures đã chạy!");
-// }
+    // bật / tắt edit theo class edit-mode trên #content
+    const observer = new MutationObserver(() => {
+        const content = document.getElementById("content");
+        const isEdit = content.classList.contains("edit-mode");
+        document.querySelectorAll(".edit-controls").forEach(c => {
+            c.style.display = isEdit ? "flex" : "none";
+        });
+        addBtn.style.display = isEdit ? "block" : "none";
+    });
+    observer.observe(document.getElementById("content"), { attributes: true });
+}
+window.ProductPage = ProductPage;
+initEditMode();
 
