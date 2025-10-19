@@ -1,5 +1,4 @@
 /* ========================== PRODUCT PAGE ========================== */
-
 .main-car {
     max-width: 1200px;
     margin: 60px auto;
@@ -240,24 +239,49 @@
     background: #a60000;
 }
 
-/* ===== EDIT MODE ===== */
+/* ===== THANH NÚT EDIT - CỐ ĐỊNH, KHÔNG ẢNH HƯỞNG BỐ CỤC ===== */
 .edit-controls {
+    position: fixed;
+    top: 150px;
+    left: 20px;
     display: flex;
-    gap: 10px;
-    padding: 10px 20px;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    pointer-events: auto;
 }
 
 .edit-controls.hidden {
-    display: none;
+    display: none !important;
 }
 
 .edit-controls button {
     background: #d62828;
     color: #fff;
     border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 10px 16px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 130px;
+}
+
+.edit-controls button:hover {
+    background: #a60000;
+    transform: translateX(2px);
+}
+
+/* ===== KHI BẬT EDIT MODE - DỊCH TOÀN BỘ NỘI DUNG SANG PHẢI ===== */
+body.edit-mode #content {
+    padding-left: 160px;
+    transition: padding 0.3s ease;
 }
 
 /* ===== ANIMATION ===== */
@@ -311,46 +335,4 @@
         flex-direction: column;
         align-items: center;
     }
-}
-
-/* ====== CHẾ ĐỘ EDIT ====== */
-.edit-controls {
-    display: none;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.edit-mode .edit-controls {
-    display: flex;
-}
-
-.edit-btn {
-    background: #d62828;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 6px 10px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-}
-
-.edit-btn:hover {
-    background: #a60000;
-}
-
-.add-car-btn {
-    display: none;
-    margin: 20px auto;
-    background: #d62828;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.edit-mode .add-car-btn {
-    display: block;
 }

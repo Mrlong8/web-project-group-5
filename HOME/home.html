@@ -10,151 +10,189 @@
     <main id="main-content contact">
         <!-- giói thiệu -->
 
-        <div>
-            <!--        -->
-            <div class="introduce">
-                <section class="toyota-banner" id="toyotaBanner">
-                    <div class="banner-track" id="bannerTrack">
-                        <!-- slides: lưu ý đường dẫn ảnh, sửa theo chỗ ảnh của bạn -->
-                        <div class="banner-slide">
-                            <img src="./IMG/banner1.jpg" alt="banner1">
-                            <div class="banner-overlay">
-                                <div class="inner">
-                                    <h1>KHÁM PHÁ DÒNG XE MỚI</h1>
-                                    <a class="cta" href="#models">Xem chi tiết</a>
-                                </div>
+        <div class="introduce">
+            <section class="toyota-banner" id="toyotaBanner">
+                <div class="banner-track" id="bannerTrack">
+                    <!-- slides: lưu ý đường dẫn ảnh, sửa theo chỗ ảnh của bạn -->
+                    <div class="banner-slide">
+                        <img src="./IMG/banner1.jpg" alt="banner1">
+                        <div class="banner-overlay">
+                            <div class="inner">
+                                <h1>KHÁM PHÁ DÒNG XE MỚI</h1>
+                                <a class="cta" href="#models">Xem chi tiết</a>
                             </div>
                         </div>
-
-                        <div class="banner-slide">
-                            <img src="./IMG/banner2.png" alt="banner2">
-                            <div class="banner-overlay">
-                                <div class="inner">
-                                    <h1>ƯU ĐÃI ĐẶC BIỆT</h1>
-                                    <a class="cta" href="#promo">Tìm hiểu</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="banner-slide">
-                            <img src="INDEX/IMG/banner3.png" alt="banner3">
-                            <div class="banner-overlay">
-                                <div class="inner">
-                                    <h1>CÔNG NGHỆ HYBRID</h1>
-                                    <a class="cta" href="#tech">Khám phá</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- clone của slide đầu để loop mượt (JS sẽ xử lý) -->
                     </div>
 
-                    <!-- nút prev / next -->
-                    <button class="banner-btn banner-prev" id="btnPrev" aria-label="Previous">&#10094;</button>
-                    <button class="banner-btn banner-next" id="btnNext" aria-label="Next">&#10095;</button>
+                    <div class="banner-slide">
+                        <img src="./IMG/banner2.png" alt="banner2">
+                        <div class="banner-overlay">
+                            <div class="inner">
+                                <h1>ƯU ĐÃI ĐẶC BIỆT</h1>
+                                <a class="cta" href="#promo">Tìm hiểu</a>
+                            </div>
+                        </div>
+                    </div>
 
-                    <!-- dots -->
-                    <div class="banner-dots" id="bannerDots" aria-hidden="false"></div>
-                </section>
-            </div>
+                    <div class="banner-slide">
+                        <img src="INDEX/IMG/banner3.png" alt="banner3">
+                        <div class="banner-overlay">
+                            <div class="inner">
+                                <h1>CÔNG NGHỆ HYBRID</h1>
+                                <a class="cta" href="#tech">Khám phá</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- clone của slide đầu để loop mượt (JS sẽ xử lý) -->
+                </div>
+
+                <!-- nút prev / next -->
+                <button class="banner-btn banner-prev" id="btnPrev" aria-label="Previous">&#10094;</button>
+                <button class="banner-btn banner-next" id="btnNext" aria-label="Next">&#10095;</button>
+
+                <!-- dots -->
+                <div class="banner-dots" id="bannerDots" aria-hidden="false"></div>
+            </section>
+        </div>
+
+        <div>
+            <!--        -->
+
 
             <!-- gồm có list car ,  -->
+            <div class="intro-car" id="introCar">
+                <img src="img/xe1.png" data-hover="img/Z1y.png" alt="Xe 1">
+                <img src="img/xe1.png" data-hover="img/Z2y.png" alt="Xe 2">
+                <img src="img/xe1.png" data-hover="img/Z3y.png" alt="Xe 3">
+
+
+
+            </div>
+            <button class="discover-home"> Discover </button>
             <section class="main-car content">
 
                 <!-- Danh sách xe -->
-                <div class="intro-car" id="introCar">
-                    <img src="img/Z1.png" data-hover="img/Z1y.png" alt="Xe 1">
-                    <img src="img/Z2.png" data-hover="img/Z2y.png" alt="Xe 2">
-                    <img src="img/Z3.png" data-hover="img/Z3y.png" alt="Xe 3">
-                    <img src="img/Z4.png" data-hover="img/Z4y.png" alt="Xe 4">
-                    <img src="img/Z5.png" data-hover="img/Z5y.png" alt="Xe 5">
-
-                    <button class="intro-btn intro-prev" id="introPrev">‹</button>
-                    <button class="intro-btn intro-next" id="introNext">›</button>
-                </div>
 
 
+                <section class="home-service-section">
+                    <h2 class="home-service-title">DỊCH VỤ CỦA CHÚNG TÔI</h2>
+                    <p class="home-service-subtitle">Chăm sóc xe toàn diện – An tâm trên mọi hành trình</p>
+
+                    <div class="home-service-container">
+                        <div class="home-service-card">
+                            <img src="./IMG/service1.png" alt="Bảo dưỡng định kỳ">
+                            <h3>Bảo dưỡng định kỳ</h3>
+                            <p>Dịch vụ bảo dưỡng định kỳ giúp xe luôn vận hành bền bỉ, tiết kiệm và an toàn.</p>
+                            <a href="#" class="home-service-btn">Tìm hiểu thêm</a>
+                        </div>
+
+                        <div class="home-service-card">
+                            <img src="./IMG/service2.png" alt="Sửa chữa chuyên nghiệp">
+                            <h3>Sửa chữa chuyên nghiệp</h3>
+                            <p>Đội ngũ kỹ thuật viên được đào tạo chính hãng Toyota, đảm bảo chất lượng sửa chữa cao
+                                nhất.</p>
+                            <a href="#" class="home-service-btn">Tìm hiểu thêm</a>
+                        </div>
+
+                        <div class="home-service-card">
+                            <img src="./IMG/service3.png" alt="Phụ tùng chính hãng">
+                            <h3>Phụ tùng chính hãng</h3>
+                            <p>Sử dụng phụ tùng chính hãng Toyota giúp xe hoạt động ổn định và tăng tuổi thọ.</p>
+                            <a href="#" class="home-service-btn">Tìm hiểu thêm</a>
+                        </div>
+                    </div>
+                </section>
 
 
                 <!-- tintuwcs liên quan  -->
-                <h1 class="title-news">NEWS </h1>
-                <article class="news">
+                <section class="home-news-section">
+                    <h2 class="home-news-title">TIN TỨC &amp; KHUYẾN MÃI</h2>
+                    <p class="home-news-subtitle">Cập nhật những ưu đãi và sự kiện mới nhất từ Toyota Việt Nam</p>
 
-                    <div class="news-car">
-                        <img src=" IMG/xe1.png" alt="">
-                        <h3>Dịch vụ chăm sóc xe</h3>
-                        <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
-                            giá khởi điểm từ 49.700 USD
-                            Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
-                            góp mặt của Everest Sport Bi-Turbo 2026,..</p>
+                    <div class="home-news-container">
+                        <div class="home-news-card">
+                            <img src="./IMG/news1.png" alt="Khuyến mãi tháng 10">
+                            <div class="home-news-content">
+                                <h3>Ưu đãi tháng 10: Giảm giá hấp dẫn cho dòng xe Corolla Cross</h3>
+                                <p>Nhận ngay ưu đãi đặc biệt khi mua xe trong tháng 10 – tiết kiệm đến 50 triệu đồng
+                                    cùng nhiều quà tặng hấp dẫn.</p>
+                                <a href="#" class="home-news-btn">Xem thêm</a>
+                            </div>
+                        </div>
 
-                    </div>
-                    <div class="news-car">
-                        <img src=" IMG/xe1.png" alt="">
-                        <h3>Dịch vụ chăm sóc xe</h3>
-                        <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
-                            giá khởi điểm từ 49.700 USD
-                            Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
-                            góp mặt của Everest Sport Bi-Turbo 2026,..</p>
-                    </div>
-                    <div class="news-car">
-                        <img src=" IMG/xe1.png" alt="">
-                        <h3>Dịch vụ chăm sóc xe</h3>
-                        <p>Ford Everest 2026 bản giới hạn chính thức trình làng,
-                            giá khởi điểm từ 49.700 USD
-                            Ford vừa mở rộng danh mục SUV tại thị trường Úc với sự
-                            góp mặt của Everest Sport Bi-Turbo 2026,..</p>
-                    </div>
-                </article>
-                <div class="pagination2">
-                    <button id="prevBtn2">see more</button>
+                        <div class="home-news-card">
+                            <img src="./IMG/news2.png" alt="Sự kiện lái thử">
+                            <div class="home-news-content">
+                                <h3>Sự kiện lái thử xe Toyota toàn quốc</h3>
+                                <p>Tham gia trải nghiệm cảm giác lái cùng Toyota, nhận ngay phần quà hấp dẫn và cơ hội
+                                    trúng thưởng lớn.</p>
+                                <a href="#" class="home-news-btn">Xem thêm</a>
+                            </div>
+                        </div>
 
-                </div>
-            </section>
-
-            <section class="content contact">
-                <div class="wrap">
-                    <div class="main-col">
-                        <h1>LIÊN HỆ VỚI AUTO</h1>
-
-                        <div class="card">
-                            <form action="">
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="fullname">Họ và tên<span class="required">*</span></label>
-                                        <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên"
-                                            required>
-                                    </div>
-                                    <div class="col">
-                                        <label for="phone">Số điện thoại<span class="required">*</span></label>
-                                        <input type="text" id="phone" placeholder="Nhập số điện thoại">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="email">Email<span class="required">*</span></label>
-                                        <input type="text" id="email" name="email" placeholder="VD:abc@gmail.com"
-                                            required>
-                                    </div>
-                                    <div class="col">
-                                        <label for="address">Địa chỉ</label>
-                                        <input type="text" id="address" name="address"
-                                            placeholder="Nhập địa chỉ của bạn" required>
-                                    </div>
-                                </div>
-
-                                <div class="full">
-                                    <label for="message">Nội dung <span class="required">*</span></label>
-                                    <textarea name="message" id="message"
-                                        placeholder="Viết nội dung liên hệ..."></textarea>
-                                </div>
-
-                                <button class="send" type="submit">Gửi đi</button>
-
-                            </form>
+                        <div class="home-news-card">
+                            <img src="./IMG/news3.png" alt="Công nghệ an toàn Toyota">
+                            <div class="home-news-content">
+                                <h3>Toyota Safety Sense – Công nghệ an toàn hàng đầu</h3>
+                                <p>Tìm hiểu các tính năng an toàn tiên tiến giúp hành trình của bạn thêm an tâm và thoải
+                                    mái.</p>
+                                <a href="#" class="home-news-btn">Xem thêm</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="home-news-more">
+                        <a href="./NEWS/news.html" class="home-news-more-btn">Xem tất cả tin tức</a>
+                    </div>
+                </section>
+
+            </section>
+
+            <section class="content testcar">
+                <form id="testDriveForm">
+                    <h2>Đăng ký lái thử xe</h2>
+
+                    <div class="form-group">
+                        <label for="name">Họ và tên</label>
+                        <input type="text" id="name" name="name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="car">Chọn mẫu xe muốn lái thử</label>
+                        <select id="car" name="car" required>
+                            <option value="">-- Chọn mẫu xe --</option>
+                            <option value="Toyota Corolla Cross">Toyota Corolla Cross</option>
+                            <option value="Toyota Vios">Toyota Vios</option>
+                            <option value="Toyota Camry">Toyota Camry</option>
+                            <option value="Toyota Hilux">Toyota Hilux</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Ngày lái thử mong muốn</label>
+                        <input type="date" id="date" name="date" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Ghi chú thêm</label>
+                        <textarea id="message" name="message" rows="3"
+                            placeholder="Ví dụ: Tôi muốn lái thử vào buổi sáng..."></textarea>
+                    </div>
+
+                    <button type="submit">Gửi đăng ký</button>
+                </form>
+
 
             </section>
         </div>

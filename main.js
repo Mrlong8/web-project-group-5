@@ -2,14 +2,10 @@ window.updateAuthUI = function () {
     const loginBtn = document.getElementById("loginBtn");
     const userIcon = document.getElementById("userIcon");
 
-    // đọc trạng thái từ localStorage (an toàn khi dùng module)
     const logged = localStorage.getItem('activeLogin');
-
     if (loginBtn) loginBtn.style.display = logged ? '' : 'none';
     if (userIcon) userIcon.style.display = logged ? 'none' : '';
 };
-
-
 
 // =============================== CHUYỂN TAB ==========================
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,42 +14,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const content = document.getElementById("content");
     const links = document.querySelectorAll(".menu-head a[data-page]");
 
-    // (Trong đoạn DOMContentLoaded của main.js) — thay phần loadPage hiện tại bằng đoạn sau
+    // ==================== LOAD PAGE ====================
     async function loadPage(url) {
         try {
             const content = document.getElementById("content");
             const pageFolder = url.split("/")[1]?.toUpperCase() || "HOME";
             const baseName = url.split("/")[2]?.split(".")[0] || "home";
 
-            // Xóa CSS cũ
-            const existingLink = document.getElementById("page-style");
-            if (existingLink) existingLink.remove();
+            // 🔹 Xóa CSS cũ
+            document.getElementById("page-style")?.remove();
 
-            // Load HTML
+            // 🔹 Load HTML
             const response = await fetch(url);
             const html = await response.text();
             content.innerHTML = html;
 
-            // Load CSS tương ứng
-            const cssFile = `../${pageFolder}/${baseName}.css`;
+            // 🔹 Load CSS tương ứng
+            const cssFile = `./${pageFolder}/${baseName}.css`;
             const css = document.createElement("link");
             css.rel = "stylesheet";
             css.href = cssFile;
             css.id = "page-style";
             document.head.appendChild(css);
 
-            // Xóa JS cũ
-            const existingScript = document.getElementById("page-script");
-            if (existingScript) existingScript.remove();
+            // 🔹 Xóa JS cũ
+            document.getElementById("page-script")?.remove();
 
-            // Load JS tương ứng
-            const jsFile = `../${pageFolder}/${baseName}.js`;
+            // 🔹 Load JS tương ứng
+            const jsFile = `./${pageFolder}/${baseName}.js`;
             const script = document.createElement("script");
             script.src = jsFile;
             script.id = "page-script";
-            document.body.appendChild(script);
-
-            // Khi script load xong thì gọi init
             script.onload = () => {
                 if (pageFolder === "PRODUCT" && window.ProductPage) ProductPage.init();
                 else if (pageFolder === "NEWS" && window.NewsPage) NewsPage.init();
@@ -64,24 +55,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (url.includes("buy") && window.BuyPage) BuyPage.init();
                 }
             };
+            document.body.appendChild(script);
 
             window.currentPage = pageFolder;
             window.loadPage = loadPage;
+            window.scrollTo({ top: 0, behavior: "smooth" });
 
         } catch (error) {
             console.error("❌ Lỗi khi tải trang:", error);
-            document.getElementById("content").innerHTML = `<p style="color:red;">Không tải được trang: ${url}</p>`;
+            document.getElementById("content").innerHTML =
+                `<p style="color:red;">Không tải được trang: ${url}</p>`;
         }
     }
 
-    // expose globally (in case above didn't run)
+    // Expose global
     window.loadPage = window.loadPage || loadPage;
 
-
-    // 🏠 Tải mặc định trang HOME khi mở web
+    // 🏠 Tải trang mặc định
     if (!content.innerHTML.trim()) loadPage("./HOME/home.html");
 
-    // 🔗 Sự kiện click menu
+    // 🔗 Bắt sự kiện menu
     links.forEach(link => {
         link.addEventListener("click", e => {
             e.preventDefault();
@@ -91,9 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 👤 Khởi tạo menu người dùng
+    // 👤 Menu người dùng
     initUserMenu(loadPage);
 
+    // Cập nhật UI khi thay đổi localStorage
     window.addEventListener('storage', (e) => {
         if (e.key === 'activeLogin') {
             window.updateAuthUI();
@@ -101,32 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//handle login button
-
 // =============================== MENU USER ==========================
 function initUserMenu(loadPage) {
     const userIcon = document.getElementById("userIcon");
     const userOverlay = document.getElementById("userOverlay");
     const userMenu = document.querySelector(".user-menu");
     const logoutBtn = document.getElementById("logoutBtn");
-
-    // 🧩 Thêm nút Edit vào menu người dùng
-    if (userMenu && !document.getElementById("editBtn")) {
-        const editBtn = document.createElement("button");
-        editBtn.id = "editBtn";
-        editBtn.textContent = "Edit";
-        editBtn.style.background = "#d62828";
-        editBtn.style.color = "#fff";
-        editBtn.style.border = "none";
-        editBtn.style.padding = "8px 16px";
-        editBtn.style.margin = "10px auto";
-        editBtn.style.borderRadius = "8px";
-        editBtn.style.display = "block";
-        editBtn.style.cursor = "pointer";
-        editBtn.style.width = "80%";
-        userMenu.appendChild(editBtn);
-    }
-
 
     if (!userIcon || !userOverlay || !userMenu) return;
 
@@ -151,27 +125,48 @@ function initUserMenu(loadPage) {
         });
     });
 
+    // 🌙 Nút chuyển chế độ sáng/tối
+    const themeToggle = document.getElementById("themeToggle");
+    if (themeToggle) {
+        const isDark = localStorage.getItem("theme") === "dark";
+        if (isDark) {
+            document.body.classList.add("dark-mode");
+            themeToggle.innerHTML = '<i class="fa fa-sun"></i> LIGHT MODE';
+        }
+
+        themeToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.body.classList.toggle("dark-mode");
+            const dark = document.body.classList.contains("dark-mode");
+            localStorage.setItem("theme", dark ? "dark" : "light");
+            themeToggle.innerHTML = dark
+                ? '<i class="fa fa-sun"></i> LIGHT MODE'
+                : '<i class="fa fa-moon"></i> DARK MODE';
+        });
+    }
+
+
     logoutBtn?.addEventListener("click", () => {
-        localStorage.setItem('activeLogin', '1');
+        localStorage.removeItem('activeLogin');
         alert("Đã đăng xuất!");
         userOverlay.classList.remove("active");
         userMenu.classList.remove("active");
         window.updateAuthUI();
     });
 }
-// Edit button behavior
+
+// =============================== NÚT EDIT ==========================
 document.addEventListener('click', (e) => {
     if (e.target.closest('#editBtn')) {
         const page = window.currentPage || 'HOME';
-        if (page === 'PRODUCT' || page === 'NEWS') {
-            // bật/tắt chế độ edit bằng class trên #content
+
+        if (page === 'PRODUCT') {
             const contentEl = document.getElementById('content');
             contentEl.classList.toggle('edit-mode');
-            alert('Chế độ chỉnh sửa: ' + (contentEl.classList.contains('edit-mode') ? 'BẬT' : 'TẮT'));
-            // pages PRODUCT/NEWS cần lắng nghe class edit-mode để hiển thị UI thêm/xóa/sửa
+            alert('🛠️ Chế độ chỉnh sửa: ' +
+                (contentEl.classList.contains('edit-mode') ? 'BẬT' : 'TẮT'));
         } else {
-            alert('Chức năng này không áp dụng cho trang này.');
+            alert('⚠️ Chức năng này chỉ áp dụng cho trang PRODUCT!');
         }
     }
 });
-

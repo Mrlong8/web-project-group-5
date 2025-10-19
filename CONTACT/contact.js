@@ -1,53 +1,86 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("contactForm");
+    if (!form) return;
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = form.querySelector("#fullname").value.trim();
+        const phone = form.querySelector("#phone").value.trim();
+        const email = form.querySelector("#email").value.trim();
+        const message = form.querySelector("#message").value.trim();
+
+        if (!name || !phone || !email || !message) {
+            showToast("⚠️ Vui lòng nhập đầy đủ thông tin!", "error");
+            return;
+        }
+
+        form.classList.add("sending");
+        const btn = form.querySelector(".contact-send");
+        btn.textContent = "Đang gửi...";
+
+        setTimeout(() => {
+            showToast("✅ Gửi liên hệ thành công! Cảm ơn bạn ❤️", "success");
+            form.reset();
+            btn.textContent = "Gửi đi";
+            form.classList.remove("sending");
+        }, 1200);
+    });
+});
+
+function showToast(msg, type = "info") {
+    const toast = document.createElement("div");
+    toast.textContent = msg;
+    toast.className = `toast ${type}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add("show"), 50);
+    setTimeout(() => toast.classList.remove("show"), 2500);
+    setTimeout(() => toast.remove(), 3000);
+}
+// ================= CONTACT PAGE =================
 const ContactPage = {
     init() {
-        this.initContactForm();
-        this.initTestDriveForm();
-        console.log("✅ ContactPage.init() loaded");
-    },
-
-    // =============================== FORM LIÊN HỆ ==========================
-    initContactForm() {
-        const form = document.querySelector("form#contactForm");
+        const form = document.getElementById("contactForm");
         if (!form) return;
 
         form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            const fullname = form.querySelector("#fullname")?.value.trim();
-            const phone = form.querySelector("#phone")?.value.trim();
-            const email = form.querySelector("#email")?.value.trim();
-            const message = form.querySelector("#message")?.value.trim();
+            const name = form.querySelector("#fullname").value.trim();
+            const phone = form.querySelector("#phone").value.trim();
+            const email = form.querySelector("#email").value.trim();
+            const message = form.querySelector("#message").value.trim();
 
-            if (!fullname || !phone || !email || !message) {
-                alert("⚠️ Vui lòng điền đầy đủ thông tin!");
+            if (!name || !phone || !email || !message) {
+                showToast("⚠️ Vui lòng nhập đầy đủ thông tin!", "error");
                 return;
             }
 
-            alert(`✅ Cảm ơn ${fullname}! Chúng tôi sẽ liên hệ sớm.`);
-            form.reset();
-        });
-    },
+            const btn = form.querySelector(".contact-send");
+            btn.textContent = "Đang gửi...";
+            form.classList.add("sending");
 
-    // =============================== FORM LÁI THỬ ==========================
-    initTestDriveForm() {
-        const form = document.getElementById("testDriveForm");
-        if (!form) return;
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            const name = form.querySelector("#name")?.value.trim();
-            const phone = form.querySelector("#phone")?.value.trim();
-            const car = form.querySelector("#car")?.value.trim();
-            const date = form.querySelector("#date")?.value.trim();
-
-            if (!name || !phone || !car || !date) {
-                alert("⚠️ Vui lòng điền đầy đủ thông tin!");
-                return;
-            }
-
-            alert(`✅ Cảm ơn ${name}! Chúng tôi sẽ sắp xếp lái thử xe ${car} vào ngày ${date}.`);
-            form.reset();
+            setTimeout(() => {
+                showToast("✅ Gửi liên hệ thành công! Cảm ơn bạn ❤️", "success");
+                form.reset();
+                btn.textContent = "Gửi đi";
+                form.classList.remove("sending");
+            }, 1000);
         });
     }
 };
+
+// Thông báo dạng toast
+function showToast(msg, type = "info") {
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.classList.add("show"), 50);
+    setTimeout(() => toast.classList.remove("show"), 2500);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+// Đăng ký ContactPage vào global để main.js gọi
+window.ContactPage = ContactPage;

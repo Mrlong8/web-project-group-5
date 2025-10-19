@@ -3,12 +3,10 @@ const ProductPage = {
         const carsContainer = document.querySelector(".list-car");
         if (!carsContainer) return;
 
-        const cars = Array.from(carsContainer.querySelectorAll(".car"));
         const searchInput = document.querySelector(".search-car");
         const brandLinks = document.querySelectorAll(".brand-filter a");
         const btnAsc = document.getElementById("sortAsc");
         const btnDesc = document.getElementById("sortDesc");
-
         const modal = document.getElementById("carDetailModal");
         const closeModal = modal.querySelector(".modal-close");
         const imgDetail = document.getElementById("carDetailImg");
@@ -21,8 +19,9 @@ const ProductPage = {
         const colorDetail = document.getElementById("carColor");
         const btnBuy = modal.querySelector(".test-drive");
         const btnCart = modal.querySelector(".add-cart");
-        const editControls = document.querySelector(".edit-controls");
+        const pageEditControls = document.querySelector(".edit-controls");
 
+        let cars = Array.from(carsContainer.querySelectorAll(".car"));
         let filteredCars = [...cars];
         let currentBrand = "all";
         let currentCar = null;
@@ -124,16 +123,83 @@ const ProductPage = {
 
         // ==================== Theo dõi Edit Mode ====================
         const observer = new MutationObserver(() => {
-            if (document.getElementById("content").classList.contains("edit-mode"))
-                editControls.classList.remove("hidden");
-            else editControls.classList.add("hidden");
+            const isEdit = document.getElementById("content").classList.contains("edit-mode");
+            if (isEdit) {
+                pageEditControls.classList.remove("hidden");
+            } else {
+                pageEditControls.classList.add("hidden");
+            }
         });
         observer.observe(document.getElementById("content"), { attributes: true, attributeFilter: ["class"] });
 
+        // ==================== Khởi tạo chế độ sửa ====================
+        initEditFunctions();
+
         console.log("✅ ProductPage.init() loaded");
+
+        // ========== Hàm nội bộ cho edit mode ==========
+        function initEditFunctions() {
+            const addBtn = document.getElementById("addCarBtn");
+            const editBtn = document.getElementById("editCarBtn");
+            const delBtn = document.getElementById("deleteCarBtn");
+
+            addBtn.addEventListener("click", () => {
+                const name = prompt("Tên xe:");
+                const brand = prompt("Hãng xe:");
+                const price = prompt("Giá (VND):");
+                const info = prompt("Thông tin động cơ:");
+                if (!name || !brand || !price) return alert("⚠️ Thiếu thông tin!");
+
+                const car = document.createElement("div");
+                car.className = "car";
+                car.dataset.brand = brand;
+                car.dataset.price = price;
+                car.innerHTML = `
+                    <img class="img-car" src="IMG/xe1.png" alt="${name}">
+                    <h1 class="name-car">${name}</h1>
+                    <h2 class="price">${parseInt(price).toLocaleString()} VND</h2>
+                    <p class="information">${info}</p>
+                    <button class="view-more">Xem thêm</button>
+                `;
+                carsContainer.appendChild(car);
+
+                // cập nhật lại danh sách và sự kiện
+                cars.push(car);
+                filterCars();
+                attachViewMoreEvents();
+                alert("✅ Đã thêm xe mới!");
+            });
+
+            editBtn.addEventListener("click", () => {
+                const carName = prompt("Nhập tên xe bạn muốn sửa:");
+                const car = cars.find(c => c.querySelector(".name-car").textContent === carName);
+                if (!car) return alert("❌ Không tìm thấy xe!");
+
+                const newName = prompt("Tên mới:", car.querySelector(".name-car").textContent);
+                const newPrice = prompt("Giá mới:", car.dataset.price);
+                if (newName) car.querySelector(".name-car").textContent = newName;
+                if (newPrice) {
+                    car.dataset.price = newPrice;
+                    car.querySelector(".price").textContent = parseInt(newPrice).toLocaleString() + " VND";
+                }
+                alert("✏️ Đã sửa xe thành công!");
+                filterCars();
+            });
+
+            delBtn.addEventListener("click", () => {
+                const carName = prompt("Nhập tên xe bạn muốn xóa:");
+                const car = cars.find(c => c.querySelector(".name-car").textContent === carName);
+                if (!car) return alert("❌ Không tìm thấy xe!");
+                car.remove();
+                cars = cars.filter(c => c !== car);
+                filterCars();
+                alert("🗑️ Đã xóa xe!");
+            });
+        }
     }
 };
 
+// Hàm chung để lấy thông tin xe
 function getCarData(car) {
     return {
         name: car.querySelector(".name-car").textContent,
@@ -147,97 +213,4 @@ function getCarData(car) {
     };
 }
 
-// ====== CHẾ ĐỘ EDIT (THÊM / SỬA / XÓA) ======
-function initEditMode() {
-    const carsContainer = document.querySelector(".list-car");
-    if (!carsContainer) return;
-
-    // Nút thêm xe khi bật edit
-    let addBtn = document.querySelector(".add-car-btn");
-    if (!addBtn) {
-        addBtn = document.createElement("button");
-        addBtn.className = "add-car-btn";
-        addBtn.textContent = "➕ Thêm xe mới";
-        carsContainer.before(addBtn);
-    }
-
-    function refreshEditButtons() {
-        document.querySelectorAll(".car").forEach(car => {
-            let controls = car.querySelector(".edit-controls");
-            if (!controls) {
-                controls = document.createElement("div");
-                controls.className = "edit-controls";
-                controls.innerHTML = `
-          <button class="edit-btn edit-car">Sửa</button>
-          <button class="edit-btn delete-car">Xóa</button>
-        `;
-                car.appendChild(controls);
-            }
-        });
-    }
-
-    refreshEditButtons();
-
-    // ===== XỬ LÝ SỰ KIỆN =====
-    addBtn.addEventListener("click", () => {
-        const name = prompt("Tên xe:");
-        const brand = prompt("Hãng xe:");
-        const price = prompt("Giá (VND):");
-        const info = prompt("Thông tin động cơ:");
-
-        if (!name || !brand || !price) return alert("Thiếu thông tin!");
-
-        const car = document.createElement("div");
-        car.className = "car";
-        car.dataset.brand = brand;
-        car.dataset.price = price;
-        car.innerHTML = `
-      <img class="img-car" src="IMG/xe1.png" alt="">
-      <h1 class="name-car">${name}</h1>
-      <h2 class="price">${parseInt(price).toLocaleString()} VND</h2>
-      <p class="information">${info}</p>
-      <div class="edit-controls">
-        <button class="edit-btn edit-car">Sửa</button>
-        <button class="edit-btn delete-car">Xóa</button>
-      </div>
-    `;
-        carsContainer.appendChild(car);
-
-        // gắn lại sự kiện click xe
-        car.addEventListener("click", () => ProductPage.init());
-        alert("✅ Đã thêm xe mới!");
-    });
-
-    carsContainer.addEventListener("click", e => {
-        if (e.target.classList.contains("delete-car")) {
-            e.stopPropagation();
-            const car = e.target.closest(".car");
-            car.remove();
-        }
-        if (e.target.classList.contains("edit-car")) {
-            e.stopPropagation();
-            const car = e.target.closest(".car");
-            const newName = prompt("Tên xe:", car.querySelector(".name-car").textContent);
-            const newPrice = prompt("Giá mới:", car.dataset.price);
-            if (newName) car.querySelector(".name-car").textContent = newName;
-            if (newPrice) {
-                car.dataset.price = newPrice;
-                car.querySelector(".price").textContent = parseInt(newPrice).toLocaleString() + " VND";
-            }
-        }
-    });
-
-    // bật / tắt edit theo class edit-mode trên #content
-    const observer = new MutationObserver(() => {
-        const content = document.getElementById("content");
-        const isEdit = content.classList.contains("edit-mode");
-        document.querySelectorAll(".edit-controls").forEach(c => {
-            c.style.display = isEdit ? "flex" : "none";
-        });
-        addBtn.style.display = isEdit ? "block" : "none";
-    });
-    observer.observe(document.getElementById("content"), { attributes: true });
-}
 window.ProductPage = ProductPage;
-initEditMode();
-

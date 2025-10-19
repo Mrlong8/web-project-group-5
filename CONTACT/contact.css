@@ -1,120 +1,177 @@
-/* ========== FORM ĐĂNG KÝ LÁI THỬ ========== */
-.testcar {
+/* body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #fff, #fffefe);
+    animation: fadeIn 0.8s ease;
+} */
+
+/* ==== Container ==== */
+.contact-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 20px;
-    background: linear-gradient(135deg, #fff, #ffe6e6);
-    animation: fadeIn 1s ease;
+    padding: 60px 20px;
 }
 
-#testDriveForm {
+.contact-wrap {
     background: #fff;
-    border-radius: 16px;
-    padding: 40px;
     width: 100%;
-    max-width: 600px;
-    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.15);
-    border-top: 5px solid #c8102e;
-    animation: slideUp 0.8s ease;
+    max-width: 950px;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.2);
+    animation: popIn 0.8s ease-out;
 }
 
-#testDriveForm h2 {
+/* ==== Title ==== */
+.contact-title {
     text-align: center;
-    color: #c8102e;
-    margin-bottom: 25px;
-    font-size: 24px;
-    font-weight: 700;
+    color: #c70000;
+    font-size: 2.6rem;
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
+    letter-spacing: 1px;
+    position: relative;
 }
 
-#testDriveForm .form-group {
-    margin-bottom: 18px;
+.contact-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 100px;
+    height: 4px;
+    background: #c70000;
+    transform: translateX(-50%);
+    border-radius: 2px;
 }
 
-#testDriveForm label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
+/* ==== Form ==== */
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact-col {
+    flex: 1;
+    min-width: 250px;
+}
+
+label {
+    font-weight: 600;
     color: #333;
+    font-size: 1rem;
 }
 
-#testDriveForm input,
-#testDriveForm select,
-#testDriveForm textarea {
+.contact-required {
+    color: #e60000;
+    margin-left: 3px;
+}
+
+input,
+textarea {
     width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
+    padding: 14px 16px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    font-size: 1rem;
     transition: all 0.3s ease;
-    font-size: 15px;
 }
 
-#testDriveForm input:focus,
-#testDriveForm select:focus,
-#testDriveForm textarea:focus {
-    border-color: #c8102e;
-    box-shadow: 0 0 8px rgba(200, 16, 46, 0.3);
+input:focus,
+textarea:focus {
+    border-color: #c70000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
     transform: scale(1.02);
 }
 
-#testDriveForm button {
-    width: 100%;
-    padding: 12px;
-    background: #c8102e;
-    border: none;
-    border-radius: 8px;
+textarea {
+    resize: none;
+    height: 140px;
+}
+
+/* ==== Nút gửi ==== */
+.contact-send {
+    align-self: center;
+    background: #c70000;
     color: #fff;
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 50px;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
 }
 
-#testDriveForm button:hover {
-    background: #a10d24;
+.contact-send:hover {
+    background: #a00000;
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
 }
 
+.contact-send:active {
+    transform: scale(0.96);
+}
 
-
-/* ========== Hiệu ứng xuất hiện ========== */
+/* ==== Hiệu ứng ==== */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideUp {
-    from {
         transform: translateY(40px);
-        opacity: 0;
     }
 
     to {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
     }
 
-    #testDriveForm {
-        padding: 25px;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
+}
 
-    .wrap {
-        padding: 40px 15px;
-    }
+/* ==== Toast thông báo ==== */
+.toast {
+    position: fixed;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c70000;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 9999;
+}
+
+.toast.show {
+    bottom: 30px;
+    opacity: 1;
+}
+
+.toast.success {
+    background: #28a745;
+}
+
+.toast.error {
+    background: #e60000;
 }

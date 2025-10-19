@@ -1,68 +1,118 @@
 const HomePage = {
     init() {
-        this.initSlideshow();
-        this.initIntroCar();
-        this.initScrollToNews();
-        console.log("✅ HomePage.init() loaded");
-    },
-
-    // =============================== SLIDESHOW & INTRO ==========================
-    initSlideshow() {
-        const track = document.getElementById("bannerTrack");
-        if (!track) return;
-        const slides = Array.from(track.children);
+        /* ==================== SLIDE SHOW ==================== */
+        const slides = document.querySelectorAll(".banner-slide");
+        const dotsContainer = document.getElementById("bannerDots");
         const prevBtn = document.getElementById("btnPrev");
         const nextBtn = document.getElementById("btnNext");
-        let index = 0;
 
-        function showSlide(i) {
-            track.style.transform = `translateX(${-i * 100}%)`;
+        if (slides.length) {
+            let current = 0;
+            let autoTimer;
+
+            slides.forEach((_, i) => {
+                const dot = document.createElement("div");
+                dot.className = "banner-dot" + (i === 0 ? " active" : "");
+                dot.addEventListener("click", () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = dotsContainer.querySelectorAll(".banner-dot");
+
+            function showSlide(i) {
+                slides.forEach((slide, idx) => {
+                    slide.style.opacity = idx === i ? "1" : "0";
+                    slide.style.transition = "opacity 1s ease-in-out";
+                });
+                dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
+            }
+
+            function goToSlide(i) {
+                current = (i + slides.length) % slides.length;
+                showSlide(current);
+                resetAuto();
+            }
+
+            function nextSlide() { goToSlide(current + 1); }
+            function prevSlide() { goToSlide(current - 1); }
+
+            function autoPlay() { autoTimer = setInterval(nextSlide, 3000); }
+            function resetAuto() { clearInterval(autoTimer); autoPlay(); }
+
+            nextBtn?.addEventListener("click", nextSlide);
+            prevBtn?.addEventListener("click", prevSlide);
+            showSlide(current);
+            autoPlay();
         }
 
-        prevBtn?.addEventListener("click", () => {
-            index = (index - 1 + slides.length) % slides.length;
-            showSlide(index);
-        });
-        nextBtn?.addEventListener("click", () => {
-            index = (index + 1) % slides.length;
-            showSlide(index);
-        });
-
-        setInterval(() => {
-            index = (index + 1) % slides.length;
-            showSlide(index);
-        }, 4000);
-    },
-
-    initIntroCar() {
-        const cars = document.querySelectorAll(".intro-car img");
-        if (!cars.length) return;
-        const prev = document.getElementById("introPrev");
-        const next = document.getElementById("introNext");
-        let index = 0;
-
-        function showCar(i) {
-            cars.forEach((img, idx) => img.classList.toggle("active", idx === i));
+        /* ==================== HÀNH VI NÚT CHUYỂN TRANG ==================== */
+        function triggerMenuPage(path) {
+            const link = document.querySelector(`.menu-head a[data-page="${path}"]`);
+            if (link) link.click();
+            else if (typeof window.loadPage === "function") window.loadPage(path);
+            else window.location.href = path;
         }
 
-        prev?.addEventListener("click", () => {
-            index = (index - 1 + cars.length) % cars.length;
-            showCar(index);
+        document.querySelector(".discover-home")?.addEventListener("click", e => {
+            e.preventDefault();
+            triggerMenuPage("./PRODUCT/product.html");
         });
-        next?.addEventListener("click", () => {
-            index = (index + 1) % cars.length;
-            showCar(index);
-        });
-    },
 
-    initScrollToNews() {
-        const btns = document.querySelectorAll(".cta");
-        const news = document.querySelector(".title-news");
-        btns.forEach(btn => {
+        document.querySelectorAll(".home-service-btn").forEach(btn => {
             btn.addEventListener("click", e => {
                 e.preventDefault();
-                news?.scrollIntoView({ behavior: "smooth" });
+                triggerMenuPage("./CONTACT/contact.html");
             });
         });
+
+        document.querySelector(".home-news-more-btn")?.addEventListener("click", e => {
+            e.preventDefault();
+            triggerMenuPage("./NEWS/news.html");
+        });
+
+        // Nút trên banner -> lướt xuống dịch vụ
+        document.querySelectorAll(".banner-overlay .cta").forEach(btn => {
+            btn.addEventListener("click", e => {
+                e.preventDefault();
+                document.querySelector(".home-service-section")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+        });
+
+        /* ==================== 3 XE QUẢNG CÁO ==================== */
+        const cars = document.querySelectorAll("#introCar img");
+        cars.forEach(car => {
+            car.addEventListener("mouseenter", () => {
+                cars.forEach(c => c.classList.remove("active", "dim"));
+                car.classList.add("active");
+                cars.forEach(c => { if (c !== car) c.classList.add("dim"); });
+            });
+            car.addEventListener("mouseleave", () => {
+                cars.forEach(c => c.classList.remove("active", "dim"));
+            });
+        });
+
+        /* ==================== FORM LÁI THỬ ==================== */
+        const testForm = document.getElementById("testDriveForm");
+        if (testForm) {
+            testForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const name = testForm.querySelector("#name").value.trim();
+                const phone = testForm.querySelector("#phone").value.trim();
+                const car = testForm.querySelector("#car").value;
+
+                if (!name || !phone || !car) {
+                    alert("⚠️ Vui lòng điền đầy đủ thông tin trước khi gửi!");
+                    return;
+                }
+
+                alert("✅ Cảm ơn bạn đã đăng ký lái thử! Chúng tôi sẽ liên hệ sớm nhất.");
+                testForm.reset();
+            });
+        }
+
+        console.log("✅ HomePage initialized successfully");
     }
 };
+
+window.HomePage = HomePage;
