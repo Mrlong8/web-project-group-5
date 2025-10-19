@@ -149,19 +149,62 @@
 }
 
 .view-more {
-    background: #c70000;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
+    display: inline-block;
+    margin-top: 12px;
+    background: #fff;
+    color: #111;
+    font-size: 1rem;
+    padding: 10px 30px;
+    border-radius: 40px;
+    border: 2px solid #111;
     cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tia sáng ẩn mặc định */
+.view-more::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+/* Khi hover vào: tia sáng quét, nền chuyển đỏ, chữ trắng */
+.view-more:hover::before {
+    left: 130%;
 }
 
 .view-more:hover {
-    background: #a60000;
+    background: linear-gradient(145deg, #c8102e, #a10d24);
+    color: #fff;
+    border-color: #c8102e;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 0 25px rgba(200, 16, 46, 0.5),
+        0 0 10px rgba(255, 255, 255, 0.3);
 }
+
+
+.view-more:hover::before {
+    left: 130%;
+}
+
+.view-more:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
+        0 0 10px rgba(255, 255, 255, 0.3);
+}
+
 
 /* ===== MODAL POPUP ===== */
 .modal.hidden {

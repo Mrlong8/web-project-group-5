@@ -10,74 +10,78 @@
     <main id="main-content contact">
         <!-- giói thiệu -->
 
-        <div class="introduce">
-            <section class="toyota-banner" id="toyotaBanner">
-                <div class="banner-track" id="bannerTrack">
-                    <!-- slides: lưu ý đường dẫn ảnh, sửa theo chỗ ảnh của bạn -->
-                    <div class="banner-slide">
-                        <img src="./IMG/banner1.jpg" alt="banner1">
-                        <div class="banner-overlay">
-                            <div class="inner">
-                                <h1>KHÁM PHÁ DÒNG XE MỚI</h1>
-                                <a class="cta" href="#models">Xem chi tiết</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="banner-slide">
-                        <img src="./IMG/banner2.png" alt="banner2">
-                        <div class="banner-overlay">
-                            <div class="inner">
-                                <h1>ƯU ĐÃI ĐẶC BIỆT</h1>
-                                <a class="cta" href="#promo">Tìm hiểu</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="banner-slide">
-                        <img src="INDEX/IMG/banner3.png" alt="banner3">
-                        <div class="banner-overlay">
-                            <div class="inner">
-                                <h1>CÔNG NGHỆ HYBRID</h1>
-                                <a class="cta" href="#tech">Khám phá</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- clone của slide đầu để loop mượt (JS sẽ xử lý) -->
-                </div>
-
-                <!-- nút prev / next -->
-                <button class="banner-btn banner-prev" id="btnPrev" aria-label="Previous">&#10094;</button>
-                <button class="banner-btn banner-next" id="btnNext" aria-label="Next">&#10095;</button>
-
-                <!-- dots -->
-                <div class="banner-dots" id="bannerDots" aria-hidden="false"></div>
-            </section>
-        </div>
 
         <div>
             <!--        -->
+            <div class="introduce">
+                <section class="toyota-banner" id="toyotaBanner">
+                    <div class="banner-track" id="bannerTrack">
+                        <!-- slides: lưu ý đường dẫn ảnh, sửa theo chỗ ảnh của bạn -->
+                        <div class="banner-slide">
+                            <img src="./IMG/banner1.jpg" alt="banner1">
+                            <div class="banner-overlay">
+                                <div class="inner">
+                                    <h1>KHÁM PHÁ DÒNG XE MỚI</h1>
+                                    <a class="cta" href="#models">Xem chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="banner-slide">
+                            <img src="./IMG/banner2.png" alt="banner2">
+                            <div class="banner-overlay">
+                                <div class="inner">
+                                    <h1>ƯU ĐÃI ĐẶC BIỆT</h1>
+                                    <a class="cta" href="#promo">Tìm hiểu</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="banner-slide">
+                            <img src="./IMG/banner3.png" alt="banner3">
+                            <div class="banner-overlay">
+                                <div class="inner">
+                                    <h1>CÔNG NGHỆ HYBRID</h1>
+                                    <a class="cta" href="#tech">Khám phá</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- clone của slide đầu để loop mượt (JS sẽ xử lý) -->
+                    </div>
+
+                    <!-- nút prev / next -->
+                    <button class="banner-btn banner-prev" id="btnPrev" aria-label="Previous">&#10094;</button>
+                    <button class="banner-btn banner-next" id="btnNext" aria-label="Next">&#10095;</button>
+
+                    <!-- dots -->
+                    <div class="banner-dots" id="bannerDots" aria-hidden="false"></div>
+                </section>
+
+                <div class="intro-car" id="introCar">
+                    <img src="img/xe1.png" data-hover="img/Z1y.png" alt="Xe 1">
+                    <img src="img/xe1.png" data-hover="img/Z2y.png" alt="Xe 2">
+                    <img src="img/xe1.png" data-hover="img/Z3y.png" alt="Xe 3">
+
+
+
+                </div>
+            </div>
 
 
             <!-- gồm có list car ,  -->
-            <div class="intro-car" id="introCar">
-                <img src="img/xe1.png" data-hover="img/Z1y.png" alt="Xe 1">
-                <img src="img/xe1.png" data-hover="img/Z2y.png" alt="Xe 2">
-                <img src="img/xe1.png" data-hover="img/Z3y.png" alt="Xe 3">
 
-
-
-            </div>
             <button class="discover-home"> Discover </button>
-            <section class="main-car content">
 
-                <!-- Danh sách xe -->
+            <section class="main-car ">
+
+                <!-- dịch vụ -->
 
 
                 <section class="home-service-section">
-                    <h2 class="home-service-title">DỊCH VỤ CỦA CHÚNG TÔI</h2>
-                    <p class="home-service-subtitle">Chăm sóc xe toàn diện – An tâm trên mọi hành trình</p>
+                    <h2 class="home-service-title ">DỊCH VỤ CỦA CHÚNG TÔI</h2>
+                    <p class="home-service-subtitle long-home-dark">Chăm sóc xe toàn diện – An tâm trên mọi hành trình
+                    </p>
 
                     <div class="home-service-container">
                         <div class="home-service-card">
@@ -107,9 +111,11 @@
 
                 <!-- tintuwcs liên quan  -->
                 <section class="home-news-section">
-                    <h2 class="home-news-title">TIN TỨC &amp; KHUYẾN MÃI</h2>
-                    <p class="home-news-subtitle">Cập nhật những ưu đãi và sự kiện mới nhất từ Toyota Việt Nam</p>
-
+                    <h2 class="home-news-title ">TIN TỨC &amp; KHUYẾN MÃI</h2>
+                    <p class="home-news-subtitle long-home-dark">Cập nhật những ưu đãi và sự kiện mới nhất từ Toyota
+                        Việt Nam</p>
+                    <br>
+                    <br>
                     <div class="home-news-container">
                         <div class="home-news-card">
                             <img src="./IMG/news1.png" alt="Khuyến mãi tháng 10">
@@ -149,7 +155,7 @@
 
             </section>
 
-            <section class="content testcar">
+            <section class=" testcar">
                 <form id="testDriveForm">
                     <h2>Đăng ký lái thử xe</h2>
 
