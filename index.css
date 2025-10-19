@@ -53,9 +53,9 @@ header {
 
 /* Logo */
 .logo-image img {
-    width: 110px;
-    /* 🔹 nhỏ gọn hơn */
-    height: auto;
+    margin-top: 20px;
+    width: 120px;
+    height: 180px;
 }
 
 /* Hiệu ứng khởi động */

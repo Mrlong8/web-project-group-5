@@ -2,7 +2,7 @@ window.updateAuthUI = function () {
     const loginBtn = document.getElementById("loginBtn");
     const userIcon = document.getElementById("userIcon");
 
-    const logged = localStorage.getItem('activeLogin');
+    const logged = localStorage.getItem('activeLogin') === '1';
     if (loginBtn) loginBtn.style.display = logged ? '' : 'none';
     if (userIcon) userIcon.style.display = logged ? 'none' : '';
 };
@@ -147,7 +147,7 @@ function initUserMenu(loadPage) {
 
 
     logoutBtn?.addEventListener("click", () => {
-        localStorage.removeItem('activeLogin');
+        localStorage.setItem('activeLogin', '1');
         alert("Đã đăng xuất!");
         userOverlay.classList.remove("active");
         userMenu.classList.remove("active");
@@ -156,6 +156,7 @@ function initUserMenu(loadPage) {
 }
 
 // =============================== NÚT EDIT ==========================
+
 document.addEventListener('click', (e) => {
     if (e.target.closest('#editBtn')) {
         const page = window.currentPage || 'HOME';
@@ -165,6 +166,8 @@ document.addEventListener('click', (e) => {
             contentEl.classList.toggle('edit-mode');
             alert('🛠️ Chế độ chỉnh sửa: ' +
                 (contentEl.classList.contains('edit-mode') ? 'BẬT' : 'TẮT'));
+            
+            
         } else {
             alert('⚠️ Chức năng này chỉ áp dụng cho trang PRODUCT!');
         }

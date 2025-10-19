@@ -1,3 +1,5 @@
+var carsAPI ='http://localhost:3000/cars';
+
 const ProductPage = {
     init() {
         const carsContainer = document.querySelector(".list-car");
@@ -143,61 +145,145 @@ const ProductPage = {
             const editBtn = document.getElementById("editCarBtn");
             const delBtn = document.getElementById("deleteCarBtn");
 
-            addBtn.addEventListener("click", () => {
+            // ========== THÊM XE ==========
+            addBtn.addEventListener("click", async (e) => {
+                e.preventDefault();
+                 e.stopPropagation();
                 const name = prompt("Tên xe:");
                 const brand = prompt("Hãng xe:");
                 const price = prompt("Giá (VND):");
                 const info = prompt("Thông tin động cơ:");
+                const img = prompt("Link ảnh (VD: IMG/xe1.png):", "IMG/xe1.png");
+
                 if (!name || !brand || !price) return alert("⚠️ Thiếu thông tin!");
 
-                const car = document.createElement("div");
-                car.className = "car";
-                car.dataset.brand = brand;
-                car.dataset.price = price;
-                car.innerHTML = `
-                    <img class="img-car" src="IMG/xe1.png" alt="${name}">
-                    <h1 class="name-car">${name}</h1>
-                    <h2 class="price">${parseInt(price).toLocaleString()} VND</h2>
-                    <p class="information">${info}</p>
-                    <button class="view-more">Xem thêm</button>
-                `;
-                carsContainer.appendChild(car);
+                try {
+                    const res = await fetch(carsAPI);
+                    const data = await res.json();
+                    const maxId = data.length > 0 ? Math.max(...data.map(c => +c.id || 0)) : 0;
 
-                // cập nhật lại danh sách và sự kiện
-                cars.push(car);
-                filterCars();
-                attachViewMoreEvents();
-                alert("✅ Đã thêm xe mới!");
-            });
+                    const newCar = {
+                        id: maxId + 1,
+                        name,
+                        brand,
+                        price: parseInt(price),
+                        info,
+                        img
+                    };
 
-            editBtn.addEventListener("click", () => {
-                const carName = prompt("Nhập tên xe bạn muốn sửa:");
-                const car = cars.find(c => c.querySelector(".name-car").textContent === carName);
-                if (!car) return alert("❌ Không tìm thấy xe!");
+                    const postRes = await fetch(carsAPI, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(newCar)
+                    });
+                    if (!postRes.ok) throw new Error("POST lỗi!");
 
-                const newName = prompt("Tên mới:", car.querySelector(".name-car").textContent);
-                const newPrice = prompt("Giá mới:", car.dataset.price);
-                if (newName) car.querySelector(".name-car").textContent = newName;
-                if (newPrice) {
-                    car.dataset.price = newPrice;
-                    car.querySelector(".price").textContent = parseInt(newPrice).toLocaleString() + " VND";
+                    // 👉 Thêm trực tiếp vào DOM
+                    const carEl = document.createElement("div");
+                    carEl.className = "car";
+                    carEl.dataset.id = newCar.id;
+                    carEl.dataset.brand = newCar.brand;
+                    carEl.dataset.price = newCar.price;
+                    carEl.innerHTML = `
+                        <button class="car-delete-btn">x</button>
+                        <img class="img-car" src="${newCar.img}" alt="${newCar.name}">
+                        <h1 class="name-car">${newCar.name}</h1>
+                        <h2 class="price">${newCar.price.toLocaleString()} VND</h2>
+                        <p class="information">${newCar.info}</p>
+                        <button class="view-more">Xem thêm</button>
+                    `;
+                    document.querySelector(".list-car").appendChild(carEl);
+
+                    alert("✅ Đã thêm xe mới!");
+                    attachViewMoreEvents(); // cập nhật event
+                } catch (err) {
+                    console.error(err);
+                    alert("❌ Lỗi khi thêm xe!");
                 }
-                alert("✏️ Đã sửa xe thành công!");
-                filterCars();
             });
 
-            delBtn.addEventListener("click", () => {
-                const carName = prompt("Nhập tên xe bạn muốn xóa:");
-                const car = cars.find(c => c.querySelector(".name-car").textContent === carName);
-                if (!car) return alert("❌ Không tìm thấy xe!");
-                car.remove();
-                cars = cars.filter(c => c !== car);
-                filterCars();
-                alert("🗑️ Đã xóa xe!");
+            // ========== SỬA XE ==========
+            editBtn.addEventListener("click", async () => {
+                const carName = prompt("Nhập tên xe bạn muốn sửa:");
+                if (!carName) return;
+
+                try {
+                    const res = await fetch(carsAPI);
+                    const cars = await res.json();
+                    const car = cars.find(c => c.name.toLowerCase() === carName.toLowerCase());
+                    if (!car) return alert("❌ Không tìm thấy xe!");
+
+                    const newName = prompt("Tên mới:", car.name);
+                    const newPrice = prompt("Giá mới:", car.price);
+                    const newInfo = prompt("Thông tin động cơ mới:", car.info);
+                    const newImg = prompt("Ảnh mới:", car.img);
+
+                    const updatedCar = {
+                        ...car,
+                        name: newName || car.name,
+                        price: parseInt(newPrice) || car.price,
+                        info: newInfo || car.info,
+                        img: newImg || car.img
+                    };
+
+                    const updateRes = await fetch(`${carsAPI}/${car.id}`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(updatedCar)
+                    });
+                    if (!updateRes.ok) throw new Error("PUT lỗi!");
+
+                    // 👉 Cập nhật trực tiếp trên DOM
+                    const carEl = document.querySelector(`.car[data-id="${car.id}"]`);
+                    if (carEl) {
+                        carEl.querySelector(".name-car").textContent = updatedCar.name;
+                        carEl.querySelector(".price").textContent = updatedCar.price.toLocaleString() + " VND";
+                        carEl.querySelector(".information").textContent = updatedCar.info;
+                        carEl.querySelector("img").src = updatedCar.img;
+                    }
+
+                    alert("✏️ Đã sửa xe thành công!");
+                } catch (err) {
+                    console.error(err);
+                    alert("❌ Lỗi khi sửa xe!");
+                }
+            });
+
+            // ========== XÓA XE ==========
+            delBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                 e.stopPropagation();
+                document.querySelectorAll(".car-delete-btn").forEach(btn => {
+                    btn.style.display = "inline-block";
+                    btn.onclick = async e => {
+                        const car = e.target.closest(".car");
+                        const carName = car.querySelector(".name-car").textContent;
+                        const carId = car.dataset.id;
+
+                        if (!confirm(`Bạn có chắc muốn xóa xe "${carName}" không?`)) return;
+
+                        try {
+                            const res = await fetch(`${carsAPI}/${carId}`, { method: "DELETE" });
+                            if (!res.ok) throw new Error("DELETE lỗi!");
+
+                            // 👉 Xóa luôn khỏi DOM
+                            car.remove();
+                            alert(`🗑️ Đã xóa "${carName}"!`);
+                        } catch (err) {
+                            console.error(err);
+                            alert("❌ Lỗi khi xóa xe!");
+                        }
+                    };
+                });
             });
         }
+
+
     }
 };
+
+
+
 
 // Hàm chung để lấy thông tin xe
 function getCarData(car) {
@@ -214,3 +300,30 @@ function getCarData(car) {
 }
 
 window.ProductPage = ProductPage;
+
+
+//handle root element
+
+var root = document.querySelector('.list-car');
+
+fetch(carsAPI)
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(cars) {
+        console.log(cars);
+        cars.forEach(car => {
+            var element = `<div class="car" data-id="${car.id}" data-brand="${car.brand}" data-price="${car.price}">
+                <button class="car-delete-btn">x</button>
+                <img class="img-car" src="${car.img}" alt="${car.name}">
+                <h1 class="name-car">${car.name}</h1>
+                <h2 class="price">${car.price.toLocaleString()} VND</h2>
+                <p class="information">${car.information}</p>
+                <button class="view-more">Xem thêm</button>
+            </div>`;
+            root.innerHTML += element;
+        });
+    })
+    .catch(function(error) {
+        console.error('Lỗi khi lấy dữ liệu từ API:', error);
+    });
