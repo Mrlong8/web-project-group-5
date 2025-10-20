@@ -140,23 +140,12 @@ body {
     text-align: center;
     margin-top: 50px;
     font-size: 2.2rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #da0525, #f70303, #e71031);
-    background-size: 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shineText 3s linear infinite;
+    font-weight: bold;
+    color: #d70928;
+
 }
 
-@keyframes shineText {
-    0% {
-        background-position: 0% 50%;
-    }
 
-    100% {
-        background-position: 200% 50%;
-    }
-}
 
 
 /* =================== INTRO CAR SECTION =================== */
