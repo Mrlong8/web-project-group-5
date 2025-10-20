@@ -2,6 +2,7 @@ var carsAPI ='http://localhost:3000/cars';
 
 const ProductPage = {
     init() {
+
         const carsContainer = document.querySelector(".list-car");
         if (!carsContainer) return;
 
@@ -28,6 +29,41 @@ const ProductPage = {
         let currentBrand = "all";
         let currentCar = null;
 
+        var root = document.querySelector('.list-car');
+
+        function createCarElement(carObj) {
+            const carEl = document.createElement('div');
+            carEl.className = 'car';
+            carEl.dataset.id = carObj.id;
+            carEl.dataset.brand = carObj.brand || carObj['data-brand'] || '';
+            carEl.dataset.price = carObj.price ?? '';
+            carEl.innerHTML = `
+                <button type="button" class="car-delete-btn" style="display:none">x</button>
+                <img class="img-car" src="${(carObj.img||'').replace(/^(\.\.\/|\.\/)?/, './')}" alt="${carObj.name || ''}">
+                <h1 class="name-car">${carObj.name || ''}</h1>
+                <h2 class="price">${(parseInt(carObj.price)||0).toLocaleString()} VND</h2>
+                <p class="information">${carObj.information || carObj.info || ''}</p>
+                <button type="button" class="view-more">Xem thêm</button>
+            `;
+            return carEl;
+        }
+
+        fetch(carsAPI)
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                console.log('Cars from API:', data);
+                root.innerHTML = ''; // clear trước
+                data.forEach(car => {
+                    const el = createCarElement(car);
+                    root.appendChild(el);
+                });
+                // cập nhật biến cars nếu cần
+                cars = Array.from(root.querySelectorAll('.car'));
+                attachViewMoreEvents();
+            })
+            .catch(function(error) {
+                console.error('Lỗi khi lấy dữ liệu từ API:', error);
+            });
         // ==================== Hiển thị danh sách ====================
         function renderCars(list) {
             carsContainer.innerHTML = "";
@@ -277,53 +313,29 @@ const ProductPage = {
                 });
             });
         }
-
-
     }
 };
 
-
+window.getCarData = function(car) {
+            if (!car) return null;
+            return {
+                id: car.dataset.id,
+                name: car.querySelector(".name-car")?.textContent || '',
+                brand: car.dataset.brand || '',
+                price: parseInt(car.dataset.price) || 0,
+                img: car.querySelector("img")?.src || '',
+                info: car.querySelector(".information")?.textContent || '',
+                year: "2024",
+                gear: "Tự động",
+                color: "Đỏ"
+            };
+        };
 
 
 // Hàm chung để lấy thông tin xe
-function getCarData(car) {
-    return {
-        name: car.querySelector(".name-car").textContent,
-        brand: car.dataset.brand,
-        price: parseInt(car.dataset.price),
-        img: car.querySelector("img").src,
-        info: car.querySelector(".information").textContent,
-        year: "2024",
-        gear: "Tự động",
-        color: "Đỏ"
-    };
-}
 
 window.ProductPage = ProductPage;
 
 
 //handle root element
 
-var root = document.querySelector('.list-car');
-
-fetch(carsAPI)
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(cars) {
-        console.log(cars);
-        cars.forEach(car => {
-            var element = `<div class="car" data-id="${car.id}" data-brand="${car.brand}" data-price="${car.price}">
-                <button class="car-delete-btn">x</button>
-                <img class="img-car" src="${car.img}" alt="${car.name}">
-                <h1 class="name-car">${car.name}</h1>
-                <h2 class="price">${car.price.toLocaleString()} VND</h2>
-                <p class="information">${car.information}</p>
-                <button class="view-more">Xem thêm</button>
-            </div>`;
-            root.innerHTML += element;
-        });
-    })
-    .catch(function(error) {
-        console.error('Lỗi khi lấy dữ liệu từ API:', error);
-    });
