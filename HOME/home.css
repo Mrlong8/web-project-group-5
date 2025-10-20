@@ -136,40 +136,96 @@ body {
     width: 100%;
 }
 
+.long-home-title {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #da0525, #f70303, #e71031);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineText 3s linear infinite;
+}
+
+@keyframes shineText {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+
 /* =================== INTRO CAR SECTION =================== */
 .intro-car {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
-    margin: 80px auto;
+    margin: 50px 100px 100px 100px;
     width: 90%;
-    /* max-width: 1100px; */
-    perspective: 1000px;
+    perspective: 1200px;
     transition: 0.6s ease;
-    margin-top: 100px;
 }
 
+/* Ảnh cơ bản */
 .intro-car img {
     width: 33%;
+    height: 350px;
     border-radius: 16px;
-    transition: transform 0.6s ease, filter 0.6s ease, box-shadow 0.6s ease;
     cursor: pointer;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     filter: brightness(0.95);
+    transition:
+        transform 0.7s ease,
+        filter 0.5s ease,
+        box-shadow 0.5s ease,
+        scale 0.3s ease;
+    transform-style: preserve-3d;
+    position: relative;
 }
 
+/* Tạo lớp ánh sáng động */
+.intro-car img::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0.6),
+            transparent);
+    transform: skewX(-25deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+/* Khi hover */
 .intro-car img:hover {
-    transform: scale(1.18) rotateY(5deg);
+    transform: rotateY(8deg) rotateX(4deg) scale(1.15);
     filter: brightness(1.25) saturate(1.2);
-    box-shadow: 0 0 35px rgba(255, 0, 0, 0.7),
-        0 0 10px rgb(255, 255, 255);
+    box-shadow:
+        0 0 35px rgba(255, 0, 0, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.3);
+    z-index: 2;
 }
 
+/* Ánh sáng quét */
+.intro-car img:hover::after {
+    left: 130%;
+    opacity: 1;
+}
+
+/* Các ảnh khác bị làm mờ nhẹ */
 .intro-car img:not(:hover) {
     transform: scale(0.9);
     opacity: 0.7;
-    filter: brightness(0.8);
+    filter: brightness(0.75);
 }
 
 /* =================== DISCOVER BUTTON =================== */
