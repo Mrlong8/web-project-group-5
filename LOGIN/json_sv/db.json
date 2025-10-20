@@ -35,6 +35,18 @@
       "fullname": "long",
       "email": "xuanlong1806@gmail.com",
       "password": "123456"
+    },
+    {
+      "id": "8d47",
+      "fullname": "chu minh Quân",
+      "email": "xuanlongbui189@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "6f9d",
+      "fullname": "chu minh Quân",
+      "email": "xuanlongbui189@gmail.com",
+      "password": "123456"
     }
   ],
   "cars": [
@@ -79,7 +91,7 @@
       "img": "../IMG/xe2.png"
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "Honda City",
       "brand": "Honda",
       "price": 123456789,
@@ -87,7 +99,7 @@
       "img": "IMG/xe1.png"
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "Honda City",
       "brand": "Honda",
       "price": 1,
