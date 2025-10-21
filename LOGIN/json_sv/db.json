@@ -51,7 +51,7 @@
   ],
   "cars": [
     {
-      "id": "10",
+      "id": "1",
       "name": "Toyota Vios",
       "brand": "Toyota",
       "price": 25000,
@@ -59,71 +59,71 @@
       "img": "./IMG/xe1.png"
     },
     {
-      "id": "11",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 26000,
-      "information": "Động cơ: 1.5 | 5 chỗ",
+      "id": "2",
+      "name": "Madza CX-3",
+      "brand": "Madza",
+      "price": 28000,
+      "information": "Động cơ: 2.0 | 5 chỗ",
       "img": "./IMG/xe2.png"
     },
     {
-      "id": "12",
-      "name": "Madza CX-3",
-      "brand": "Madza",
-      "price": 28000,
-      "information": "Động cơ: 2.0 | 5 chỗ",
-      "img": "../IMG/xe3.png"
-    },
-    {
-      "id": "13",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 123456789,
-      "info": "1.5",
-      "img": "IMG/xe4.png"
-    },
-    {
-      "id": "10",
+      "id": "3",
       "name": "Toyota Vios",
       "brand": "Toyota",
       "price": 25000,
       "information": "Động cơ: 1.5 | 5 chỗ",
-      "img": "./IMG/xe5.png"
+      "img": "./IMG/xe3.png"
     },
     {
-      "id": "11",
+      "id": "4",
       "name": "Honda City",
       "brand": "Honda",
       "price": 26000,
       "information": "Động cơ: 1.5 | 5 chỗ",
-      "img": "./IMG/xe6.png"
+      "img": "./IMG/xe4.png"
     },
     {
-      "id": "12",
+      "id": "5",
       "name": "Madza CX-3",
       "brand": "Madza",
       "price": 28000,
       "information": "Động cơ: 2.0 | 5 chỗ",
-      "img": "../IMG/xe7.png"
+      "img": "../IMG/xe5.png"
     },
     {
-      "id": "13",
+      "id": "6",
       "name": "Honda City",
       "brand": "Honda",
       "price": 123456789,
       "info": "1.5",
-      "img": "IMG/xe8.png"
+      "img": "IMG/xe6.png"
     },
     {
-      "id": "10",
+      "id": "7",
       "name": "Toyota Vios",
       "brand": "Toyota",
       "price": 25000,
       "information": "Động cơ: 1.5 | 5 chỗ",
-      "img": "./IMG/xe9.png"
+      "img": "./IMG/xe7.png"
     },
     {
-      "id": "11",
+      "id": "8",
+      "name": "Honda City",
+      "brand": "Honda",
+      "price": 26000,
+      "information": "Động cơ: 1.5 | 5 chỗ",
+      "img": "./IMG/xe8.png"
+    },
+    {
+      "id": "9",
+      "name": "Madza CX-3",
+      "brand": "Madza",
+      "price": 28000,
+      "information": "Động cơ: 2.0 | 5 chỗ",
+      "img": "../IMG/xe9.png"
+    },
+    {
+      "id": "10",
       "name": "Honda City",
       "brand": "Honda",
       "price": 26000,
@@ -131,7 +131,7 @@
       "img": "./IMG/xe10.png"
     },
     {
-      "id": "12",
+      "id": "11",
       "name": "Madza CX-3",
       "brand": "Madza",
       "price": 28000,
@@ -139,7 +139,7 @@
       "img": "../IMG/xe11.png"
     },
     {
-      "id": "13",
+      "id": "12",
       "name": "Honda City",
       "brand": "Honda",
       "price": 123456789,
@@ -147,7 +147,7 @@
       "img": "IMG/xe12.png"
     },
     {
-      "id": "10",
+      "id": "13",
       "name": "Toyota Vios",
       "brand": "Toyota",
       "price": 25000,
@@ -155,7 +155,7 @@
       "img": "./IMG/xe13.png"
     },
     {
-      "id": "11",
+      "id": "14",
       "name": "Honda City",
       "brand": "Honda",
       "price": 26000,
@@ -163,7 +163,7 @@
       "img": "./IMG/xe14.png"
     },
     {
-      "id": "12",
+      "id": "15",
       "name": "Madza CX-3",
       "brand": "Madza",
       "price": 28000,
@@ -171,7 +171,7 @@
       "img": "../IMG/xe15.png"
     },
     {
-      "id": "13",
+      "id": "16",
       "name": "Honda City",
       "brand": "Honda",
       "price": 123456789,
@@ -179,7 +179,7 @@
       "img": "IMG/xe16.png"
     },
     {
-      "id": "10",
+      "id": "17",
       "name": "Toyota Vios",
       "brand": "Toyota",
       "price": 25000,
@@ -187,7 +187,7 @@
       "img": "./IMG/xe17.png"
     },
     {
-      "id": "11",
+      "id": "18",
       "name": "Honda City",
       "brand": "Honda",
       "price": 26000,
@@ -195,7 +195,7 @@
       "img": "./IMG/xe18.png"
     },
     {
-      "id": "12",
+      "id": "19",
       "name": "Madza CX-3",
       "brand": "Madza",
       "price": 28000,
@@ -203,7 +203,7 @@
       "img": "../IMG/xe19.png"
     },
     {
-      "id": "13",
+      "id": "20",
       "name": "Honda City",
       "brand": "Honda",
       "price": 123456789,

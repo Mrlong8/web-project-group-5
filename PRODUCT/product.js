@@ -64,6 +64,7 @@ const ProductPage = {
             .catch(function(error) {
                 console.error('Lỗi khi lấy dữ liệu từ API:', error);
             });
+
         // ==================== Hiển thị danh sách ====================
         function renderCars(list) {
             carsContainer.innerHTML = "";
@@ -331,11 +332,4 @@ window.getCarData = function(car) {
             };
         };
 
-
-// Hàm chung để lấy thông tin xe
-
 window.ProductPage = ProductPage;
-
-
-//handle root element
-
