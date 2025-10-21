@@ -163,7 +163,7 @@ Validator({
                 if (user) {
                     
                     alert('Đăng nhập thành công!');
-                    localStorage.removeItem('activeLogin');
+                    localStorage.setItem('activeLogin', '1');
                     window.location.href = '../index.html';
                 } else {
                     alert('Email hoặc mật khẩu không chính xác.');

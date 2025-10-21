@@ -3,8 +3,9 @@ window.updateAuthUI = function () {
     const userIcon = document.getElementById("userIcon");
 
     const logged = localStorage.getItem('activeLogin') === '1';
-    if (loginBtn) loginBtn.style.display = logged ? '' : 'none';
-    if (userIcon) userIcon.style.display = logged ? 'none' : '';
+    if (loginBtn) loginBtn.style.display = logged ? 'none' : '';
+    if (userIcon) userIcon.style.display = logged ? '' : 'none';
+    console.log(localStorage)
 };
 
 // =============================== CHUYỂN TAB ==========================
@@ -147,7 +148,7 @@ function initUserMenu(loadPage) {
 
 
     logoutBtn?.addEventListener("click", () => {
-        localStorage.setItem('activeLogin', '1');
+        localStorage.removeItem('activeLogin');
         alert("Đã đăng xuất!");
         userOverlay.classList.remove("active");
         userMenu.classList.remove("active");
