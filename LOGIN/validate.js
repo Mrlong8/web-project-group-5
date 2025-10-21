@@ -161,9 +161,8 @@ Validator({
                     return acc.email === email && acc.password === password;
                 });
                 if (user) {
-                    
+                    localStorage.removeItem('activeLogin');
                     alert('Đăng nhập thành công!');
-                    localStorage.setItem('activeLogin', '1');
                     window.location.href = '../index.html';
                 } else {
                     alert('Email hoặc mật khẩu không chính xác.');
