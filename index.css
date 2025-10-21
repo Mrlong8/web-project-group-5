@@ -1,0 +1,395 @@
+/* =============================== PHẦN CHUNG =============================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff;
+    color: #000;
+    overflow-x: hidden;
+}
+
+body {
+    animation: fadeBodyIn 0.8s ease forwards;
+}
+
+@keyframes fadeBodyIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =============================== HEADER =============================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 Thu nhỏ thanh menu */
+    height: 70px;
+    padding: 10px 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* 🔹 Hiệu ứng xuất hiện khi load */
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: headerFadeIn 0.8s ease forwards;
+}
+
+/* Logo */
+.logo-image img {
+    margin-top: 20px;
+    width: 120px;
+    height: 180px;
+}
+
+/* Hiệu ứng khởi động */
+@keyframes headerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Vùng chứa menu và icon */
+.long-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    flex: 1;
+}
+
+/* ================= MENU DESKTOP ================= */
+.menu-head ul {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+}
+
+.menu-head ul li {
+    list-style: none;
+}
+
+.menu-head ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s, border-bottom 0.3s;
+    padding-bottom: 5px;
+}
+
+.menu-head ul li a:hover,
+.menu-head ul li a.active {
+    color: #e30e0e;
+    border-bottom: 2px solid red;
+}
+
+/* LOGIN button */
+.menu-head ul li a.login-btn {
+    background: #e22125;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    border: none;
+}
+
+.menu-head ul li a.login-btn:hover {
+    background: #e76f06;
+}
+
+/* ================= MENU MOBILE ================= */
+@media (max-width: 800px) {
+    .menu-head ul {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(255, 255, 255, 0.97);
+        z-index: 999;
+        gap: 25px;
+        animation: fadeIn 0.4s ease forwards;
+    }
+
+    .menu-head ul.show {
+        display: flex;
+    }
+
+    .menu-head ul li a {
+        font-size: 22px;
+    }
+
+    .menu-head ul li a.login-btn {
+        padding: 10px 30px;
+        font-size: 20px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* ================= USER ICON & OVERLAY ================= */
+.user-icon {
+    font-size: 32px;
+    color: #696969;
+    cursor: pointer;
+    z-index: 2000;
+    transition: transform 0.2s ease;
+}
+
+.user-icon:hover {
+    transform: scale(1.1);
+
+}
+
+/* Overlay nền tối */
+.user-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 999;
+}
+
+.user-overlay.active {
+    display: block;
+}
+
+/* Menu người dùng */
+.user-menu {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.user-menu.active {
+    right: 0;
+}
+
+.user-menu h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #222;
+}
+
+.user-menu ul {
+    list-style: none;
+}
+
+.user-menu li {
+    margin: 15px 0;
+}
+
+.user-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.user-menu a:hover {
+    background: #f5f5f5;
+}
+
+/* ================= MAIN & FOOTER ================= */
+main {
+    margin-top: 120px;
+    /* tránh header che nội dung */
+    padding: 0 20px;
+    min-height: 80vh;
+}
+
+.content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+    background-color: #222;
+    color: #ccc;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.footer a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.footer-top {
+    padding: 50px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer-col h4 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-bottom {
+    background-color: #111;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #777;
+}
+
+.footer-bottom .footer-links {
+    margin-top: 10px;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+    gap: 20px;
+}
+
+.footer-bottom .footer-links li a {
+    color: #777;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .footer-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* ===================== DARK MODE ===================== */
+body.dark-mode {
+    background-color: #434242;
+    color: #eee;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+body.dark-mode header {
+    background: #393939;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .menu-head ul li a {
+    color: #ddd;
+}
+
+
+body.dark-mode .menu-head ul li a.active,
+body.dark-mode .menu-head ul li a:hover {
+    color: #ff4b4b;
+    border-bottom-color: #ff4b4b;
+}
+
+body.dark-mode .user-menu {
+    background: #1c1c1c;
+    color: #fff;
+}
+
+body.dark-mode .user-menu a {
+    color: #fff;
+}
+
+body.dark-mode .user-menu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode footer {
+    border-top-color: #444;
+    color: #ccc;
+}
+
+body.dark-mode .main-car {
+    color: #333;
+}
+
+body.dark-mode .main-car .long-home-dark {
+    color: white;
+}
+
+body.dark-mode .content {
+    background-color: #434242;
+}
+
+body.dark-mode .hero {
+    background-color: #343131;
+}

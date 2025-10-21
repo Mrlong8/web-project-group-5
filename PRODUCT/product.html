@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link rel="stylesheet" href="product.css" />
+</head>
+
+<body>
+    <!-- Nút thêm/sửa/xóa -->
+    <div class="edit-controls hidden">
+        <button type="button" id="addCarBtn">➕ Thêm</button>
+        <button type="button" id="editCarBtn">✏️ Sửa</button>
+        <button type="button" id="deleteCarBtn">🗑️ Xóa</button>
+    </div>
+    <main id="main-content">
+
+        <section class="main-car ">
+            <h1 class="title-main">DISCOVER VEHICLE LINES</h1>
+
+            <nav class="menu-main">
+                <input class="search-car" type="search" placeholder="Tìm kiếm xe..." />
+
+                <div class="filter-sort">
+                    <ul class="brand-filter">
+                        <li><a href="#" data-brand="all" class="active">All</a></li>
+                        <li><a href="#" data-brand="Toyota">Toyota</a></li>
+                        <li><a href="#" data-brand="Honda">Honda</a></li>
+                        <li><a href="#" data-brand="Mazda">Mazda</a></li>
+                        <li><a href="#" data-brand="Vinfast">Vinfast</a></li>
+                    </ul>
+
+                    <div class="sort-buttons">
+                        <button id="sortAsc">Giá ↑</button>
+                        <button id="sortDesc">Giá ↓</button>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <!-- Danh sách xe -->
+            <article class="list-car">
+                <div class="car" data-brand="Toyota" data-price="430678000">
+                    <img class="img-car" src="IMG/xe1.png" alt="Toyota Vios" />
+                    <h1 class="name-car">Toyota Vios</h1>
+                    <h2 class="price">430.678.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Honda" data-price="520000000">
+                    <img class="img-car" src="IMG/xe2.png" alt="Honda City" />
+                    <h1 class="name-car">Honda City</h1>
+                    <h2 class="price">520.000.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Mazda" data-price="640000000">
+                    <img class="img-car" src="IMG/xe3.png" alt="Mazda CX-3" />
+                    <h1 class="name-car">Mazda CX-3</h1>
+                    <h2 class="price">640.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Toyota" data-price="430678000">
+                    <img class="img-car" src="IMG/xe4.png" alt="Toyota Vios" />
+                    <h1 class="name-car">Toyota Vios</h1>
+                    <h2 class="price">430.678.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Honda" data-price="520000000">
+                    <img class="img-car" src="IMG/xe5.png" alt="Honda City" />
+                    <h1 class="name-car">Honda City</h1>
+                    <h2 class="price">520.000.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Mazda" data-price="640000000">
+                    <img class="img-car" src="IMG/xe18.png" alt="Mazda CX-3" />
+                    <h1 class="name-car">Mazda CX-3</h1>
+                    <h2 class="price">640.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Toyota" data-price="430678000">
+                    <img class="img-car" src="IMG/xe15.png" alt="Toyota Vios" />
+                    <h1 class="name-car">Toyota Vios</h1>
+                    <h2 class="price">430.678.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Honda" data-price="520000000">
+                    <img class="img-car" src="IMG/xe10.png" alt="Honda City" />
+                    <h1 class="name-car">Honda City</h1>
+                    <h2 class="price">520.000.000 VND</h2>
+                    <p class="information">Động cơ: 1.5 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+
+                <div class="car" data-brand="Mazda" data-price="640000000">
+                    <img class="img-car" src="IMG/xe11.png" alt="Mazda CX-3" />
+                    <h1 class="name-car">Mazda CX-3</h1>
+                    <h2 class="price">640.000.000 VND</h2>
+                    <p class="information">Động cơ: 2.0 | 5 chỗ</p>
+                    <button class="view-more">Xem thêm</button>
+                </div>
+            </article>
+
+            <!-- POPUP -->
+            <div id="carDetailModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="modal-close">&times;</span>
+                    <div class="modal-body">
+                        <div class="modal-left">
+                            <img id="carDetailImg" src="" alt="Car image" />
+                        </div>
+                        <div class="modal-right">
+                            <h2 id="carName"></h2>
+                            <p><strong>Hãng:</strong> <span id="carBrand"></span></p>
+                            <p><strong>Động cơ:</strong> <span id="carEngine"></span></p>
+                            <p><strong>Giá:</strong> <span id="carPrice"></span></p>
+                            <p><strong>Năm sản xuất:</strong> <span id="carYear"></span></p>
+                            <p><strong>Hộp số:</strong> <span id="carGear"></span></p>
+                            <p><strong>Màu xe:</strong> <span id="carColor"></span></p>
+
+                            <div class="modal-actions">
+                                <button class="btn test-drive">Mua ngay</button>
+                                <button class="btn add-cart">Thêm vào giỏ hàng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="product.js"></script>
+</body>
+
+</html>

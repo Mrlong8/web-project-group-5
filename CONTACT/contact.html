@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ Auto</title>
+    <link rel="stylesheet" href="contact.css">
+    <script src="contact.js" defer></script>
+</head>
+
+<body>
+    <section class="contact-section">
+        <div class="contact-wrap">
+            <div class="contact-main-col">
+                <h1 class="contact-title">LIÊN HỆ VỚI FIRE_GROUP</h1>
+
+                <div class="contact-card">
+                    <form id="contactForm">
+                        <div class="contact-row">
+                            <div class="contact-col">
+                                <label for="fullname">Họ và tên<span class="contact-required">*</span></label>
+                                <input type="text" id="fullname" placeholder="Nhập họ và tên" required>
+                            </div>
+                            <div class="contact-col">
+                                <label for="phone">Số điện thoại<span class="contact-required">*</span></label>
+                                <input type="text" id="phone" placeholder="Nhập số điện thoại" required>
+                            </div>
+                        </div>
+
+                        <div class="contact-row">
+                            <div class="contact-col">
+                                <label for="email">Email<span class="contact-required">*</span></label>
+                                <input type="email" id="email" placeholder="VD: abc@gmail.com" required>
+                            </div>
+                            <div class="contact-col">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" id="address" placeholder="Nhập địa chỉ của bạn">
+                            </div>
+                        </div>
+
+                        <div class="contact-full">
+                            <label for="message">Nội dung <span class="contact-required">*</span></label>
+                            <textarea id="message" placeholder="Viết nội dung liên hệ..." required></textarea>
+                        </div>
+
+                        <button class="contact-send" type="submit">Gửi đi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

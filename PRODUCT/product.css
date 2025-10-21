@@ -1,0 +1,411 @@
+/* ========================== PRODUCT PAGE ========================== */
+.main-car {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+    animation: fadeIn 0.8s ease-in;
+}
+
+.title-main {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #c70000;
+    margin-bottom: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.title-main::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background: #c70000;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* ===== MENU - FILTER ===== */
+.menu-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-car {
+    padding: 10px 15px;
+    width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-car:focus {
+    border-color: #c70000;
+    box-shadow: 0 0 5px #c70000;
+}
+
+.brand-filter {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brand-filter li a {
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #333;
+    background: #f5f5f5;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.brand-filter li a.active,
+.brand-filter li a:hover {
+    background: #c70000;
+    color: #fff;
+}
+
+.sort-buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.sort-buttons button {
+    border: none;
+    background: #c70000;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sort-buttons button:hover {
+    background: #a60000;
+}
+
+/* ===== DANH SÁCH XE ===== */
+.list-car {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    justify-items: center;
+    margin-top: 30px;
+}
+
+.car {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: slideUp 0.6s ease forwards;
+}
+
+.car:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(199, 0, 0, 0.3);
+}
+
+.car img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.name-car {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 5px;
+}
+
+.price {
+    color: #c70000;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.information {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.view-more {
+    display: inline-block;
+    margin-top: 12px;
+    background: #fff;
+    color: #111;
+    font-size: 1rem;
+    padding: 10px 30px;
+    border-radius: 40px;
+    border: 2px solid #111;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tia sáng ẩn mặc định */
+.view-more::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.7), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.6s ease;
+}
+
+/* Khi hover vào: tia sáng quét, nền chuyển đỏ, chữ trắng */
+.view-more:hover::before {
+    left: 130%;
+}
+
+.view-more:hover {
+    background: linear-gradient(145deg, #c8102e, #a10d24);
+    color: #fff;
+    border-color: #c8102e;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 0 25px rgba(200, 16, 46, 0.5),
+        0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+.view-more:hover::before {
+    left: 130%;
+}
+
+.view-more:hover {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.6),
+        0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+/* ===== MODAL POPUP ===== */
+.modal.hidden {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 15px;
+    max-width: 900px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    animation: popUp 0.3s ease;
+    padding: 20px;
+}
+
+.modal-body {
+    display: flex;
+    gap: 20px;
+}
+
+.modal-left img {
+    width: 280px;
+    border-radius: 10px;
+}
+
+.modal-right {
+    flex: 1;
+    padding: 10px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 26px;
+    cursor: pointer;
+    color: #c70000;
+    transition: 0.3s;
+}
+
+.modal-close:hover {
+    color: #900;
+}
+
+.modal-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    background: #c70000;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #a60000;
+}
+
+/* ===== THANH NÚT EDIT - CỐ ĐỊNH, KHÔNG ẢNH HƯỞNG BỐ CỤC ===== */
+.edit-controls {
+    position: fixed;
+    top: 150px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    pointer-events: auto;
+}
+
+.edit-controls.hidden {
+    display: none !important;
+}
+
+.edit-controls button {
+    background: #d62828;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    text-align: left;
+    width: 130px;
+}
+
+.edit-controls button:hover {
+    background: #a60000;
+    transform: translateX(2px);
+}
+
+/* ===== KHI BẬT EDIT MODE - DỊCH TOÀN BỘ NỘI DUNG SANG PHẢI ===== */
+body.edit-mode #content {
+    padding-left: 160px;
+    transition: padding 0.3s ease;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .list-car {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .list-car {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-body {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+#content.edit-mode .list-car {
+    margin-left: 0;
+}
+
+/* ========================== btn delete ========================== */
+.car-delete-btn {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: #d62828;
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.12s ease;
+    padding: 0;
+}
+
+.car-delete-btn:hover {
+    transform: scale(1.08);
+    background: #a60000;
+}

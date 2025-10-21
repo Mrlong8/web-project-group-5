@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Buy Car</title>
+    <link rel="stylesheet" href="buy.css">
+</head>
+
+<body>
+    <main class="content">
+        <section class="buy-page">
+            <h1>Mua xe</h1>
+            <div class="buy-container">
+                <div class="summary">
+                    <img id="buyImg" src="" alt="car image">
+                    <h2 id="buyName"></h2>
+                    <p><strong>Hãng:</strong> <span id="buyBrand"></span></p>
+                    <p><strong>Động cơ:</strong> <span id="buyEngine"></span></p>
+                    <p><strong>Giá:</strong> <span id="buyPrice"></span></p>
+                </div>
+
+                <div class="form-area">
+                    <h3>Thông tin người mua</h3>
+                    <form id="buyForm">
+                        <label>Tên:</label>
+                        <input type="text" id="fullName" required>
+                        <label>Số điện thoại:</label>
+                        <input type="tel" id="phone" required>
+                        <label>Địa chỉ:</label>
+                        <input type="text" id="address" required>
+                        <div class="actions">
+                            <button type="button" id="payBtn">Thanh toán</button>
+                            <button type="button" id="backBtn">Quay lại</button>
+                        </div>
+                    </form>
+                    <div id="qrModal" class="qr-modal hidden">
+                        <div class="qr-content">
+                            <span id="qrClose" class="qr-close">&times;</span>
+                            <h4>Quét mã QR để thanh toán</h4>
+                            <img id="qrImg" alt="qr code">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <script src="buy.js"></script>
+</body>
+
+</html>

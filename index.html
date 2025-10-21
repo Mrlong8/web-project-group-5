@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dealer</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="./PRODUCT/product.css">
+    <link rel="stylesheet" href="./CONTACT/contact.css">
+    <link rel="stylesheet" href="./HOME/home.css">
+    <link rel="stylesheet" href="./NEWS/news.css">
+
+</head>
+
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo-image">
+            <img src="./IMG/1.png" alt="Logo">
+        </div>
+
+        <div class="long-menu">
+            <nav class="menu-head" id="menu-head">
+                <ul>
+                    <li><a href="#" data-page="./HOME/home.html"><i class="fa fa-home"></i> HOME</a></li>
+                    <li><a href="#" data-page="./PRODUCT/product.html"><i class="fa fa-car"></i> PRODUCT</a></li>
+                    <li><a href="#" data-page="./CONTACT/contact.html"><i class="fa fa-envelope"></i> CONTACT</a></li>
+                    <li><a href="#" data-page="./NEWS/news.html"><i class="fa fa-newspaper"></i> NEWS</a></li>
+                    <li><a id="loginBtn" href="./LOGIN/logIn.html" class="login-btn">LOGIN</a></li>
+                </ul>
+
+            </nav>
+            <!-- tình năng  -->
+            <div class="user-icon" id="userIcon">
+                <i class="fa fa-user-circle"></i>
+            </div>
+        </div>
+
+
+    </header>
+    <div class="user-overlay" id="userOverlay">
+        <div class="user-menu">
+            <h3>Tài khoản</h3>
+            <ul>
+                <li><a href="#" id="themeToggle"><i class="fa fa-adjust"></i> DARK MODE</a></li>
+
+                <li><a href="#" data-page="./HOME/home.html"><i class="fa fa-home"></i> HOME</a></li>
+                <li><a href="#" data-page="./PRODUCT/product.html"><i class="fa fa-car"></i> PRODUCT</a></li>
+                <li><a href="#" data-page="./CONTACT/contact.html"><i class="fa fa-envelope"></i> CONTACT</a></li>
+                <li><a href="#" data-page="./NEWS/news.html"><i class="fa fa-newspaper"></i> NEWS</a></li>
+                <li><a href="#" data-page="./FEATURE/shopcart.html"><i class="fa fa-shopping-cart"></i> SHOP CART</a>
+                </li>
+                <li><a href="#" id="editBtn"><i class="fa fa-edit"></i> EDIT</a></li>
+
+                <li><a href="#" id="logoutBtn"><i class="fa fa-sign-out-alt"></i> LOGOUT</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- NỘI DUNG SẼ ĐƯỢC THAY THẾ -->
+    <main id="content"></main>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <h4>Khám phá</h4>
+                        <ul>
+                            <li><a href="#">Sản phẩm</a></li>
+                            <li><a href="#">Công nghệ</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Tin tức &amp; Khuyến mãi</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Về chúng tôi</h4>
+                        <ul>
+                            <li><a href="#">Giới thiệu công ty</a></li>
+                            <li><a href="#">Tuyển dụng</a></li>
+                            <li><a href="#">Cộng đồng</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Hỗ trợ khách hàng</h4>
+                        <ul>
+                            <li><a href="#">Tìm đại lý</a></li>
+                            <li><a href="#">Dịch vụ sau bán hàng</a></li>
+                            <li><a href="#">Hỗ trợ tài chính</a></li>
+                            <li><a href="#">Bảo hiểm</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Liên hệ</h4>
+                        <p>Hotline: <a href="tel:18001234">1800 1234</a></p>
+                        <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+                        <p>Địa chỉ: 123 Đường ABC, Quận X, TP Hà Nội</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2025 Công ty XYZ. Bảo lưu mọi quyền.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Sơ đồ trang</a></li>
+                    <li><a href="#">Chính sách và điều khoản</a></li>
+                    <li><a href="#">Chính sách bảo mật thông tin cá nhân</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+    <script type="module" src="./LOGIN/validate.js"></script>
+    <script type="module" src="main.js"></script>
+    <!-- <script src="./PRODUCT/product.js"></script> -->
+    <script src="./CONTACT/contact.js"></script>
+    <!-- <script src="./HOME/home.js"></script> -->
+    <script src="./NEWS/news.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+{
+  "accounts": [
+    {
+      "id": "1",
+      "email": "abc@gmail.com",
+      "username": "user1",
+      "password": "pass1"
+    },
+    {
+      "id": "2",
+      "email": "abc@gmail.com",
+      "username": "user2",
+      "password": "pass2"
+    },
+    {
+      "id": "0f5a",
+      "fullname": "huuthanh",
+      "email": "suppo1999@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "3332",
+      "fullname": "huuthanh9",
+      "email": "abc1@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "eba0",
+      "fullname": "long",
+      "email": "xuanlong1806@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "b12d",
+      "fullname": "long",
+      "email": "xuanlong1806@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "8d47",
+      "fullname": "chu minh Quân",
+      "email": "xuanlongbui189@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "6f9d",
+      "fullname": "chu minh Quân",
+      "email": "xuanlongbui189@gmail.com",
+      "password": "123456"
+    }
+  ],
+  "cars": [
+    {
+      "id": "7",
+      "name": "Toyota Vios",
+      "brand": "Toyota",
+      "price": 25000,
+      "information": "Động cơ: 1.5 | 5 chỗ",
+      "img": "./IMG/xe1.png"
+    },
+    {
+      "id": "9",
+      "name": "Madza CX-3",
+      "brand": "Madza",
+      "price": 28000,
+      "information": "Động cơ: 2.0 | 5 chỗ",
+      "img": "./IMG/xe2.png"
+    },
+    {
+      "id": "10",
+      "name": "Toyota Vios",
+      "brand": "Toyota",
+      "price": 25000,
+      "information": "Động cơ: 1.5 | 5 chỗ",
+      "img": "./IMG/xe1.png"
+    },
+    {
+      "id": "11",
+      "name": "Honda City",
+      "brand": "Honda",
+      "price": 26000,
+      "information": "Động cơ: 1.5 | 5 chỗ",
+      "img": "./IMG/xe2.png"
+    },
+    {
+      "id": "12",
+      "name": "Madza CX-3",
+      "brand": "Madza",
+      "price": 28000,
+      "information": "Động cơ: 2.0 | 5 chỗ",
+      "img": "../IMG/xe3.png"
+    },
+    {
+      "id": "13",
+      "name": "Honda City",
+      "brand": "Honda",
+      "price": 123456789,
+      "info": "1.5",
+      "img": "IMG/xe4.png"
+    },
+    {
+      "id": "10",
+      "name": "Toyota Vios",
+      "brand": "Toyota",
+      "price": 25000,
+      "information": "Động cơ: 1.5 | 5 chỗ",
+      "img": "./IMG/xe5.png"
+    },
+    {
+      "id": "11",
+      "name": "Honda City",
+      "brand": "Honda",
+      "price": 26000,
+      "information": "Động cơ: 1.5 | 5 chỗ",
+      "img": "./IMG/xe6.png"
+    },
+    {
+      "id": "12",
+      "name": "Madza CX-3",
+      "brand": "Madza",
+      "price": 28000,
+      "information": "Động cơ: 2.0 | 5 chỗ",
+      "img": "../IMG/xe7.png"
+    },
+    {
+      "id": "13",
+      "name": "Honda City",
+      "brand": "Honda",
+      "price": 123456789,
+      "info": "1.5",
+      "img": "IMG/xe8.png"
+    },
+    {
+      "id": 14,
+      "name": "123vfdvfd",
+      "brand": "dưcdc",
+      "price": 12324545657,
+      "info": "12",
+      "img": "IMG/xe1.png"
+    }
+  ]
+}
