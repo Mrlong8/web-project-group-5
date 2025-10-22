@@ -52,25 +52,25 @@
   "cars": [
     {
       "id": "1",
-      "name": "Toyota Vios",
+      "name": "Toyota Altis",
       "brand": "Toyota",
-      "price": 25000,
+      "price": 1630000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe1.png"
     },
     {
       "id": "2",
-      "name": "Madza CX-3",
-      "brand": "Madza",
-      "price": 28000,
+      "name": "Toyota Vios",
+      "brand": "Toyota",
+      "price": 458000000,
       "information": "Động cơ: 2.0 | 5 chỗ",
       "img": "./IMG/xe2.png"
     },
     {
       "id": "3",
-      "name": "Toyota Vios",
+      "name": "Toyota Camry",
       "brand": "Toyota",
-      "price": 25000,
+      "price": 1250000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe3.png"
     },
@@ -84,113 +84,113 @@
     },
     {
       "id": "5",
-      "name": "Madza CX-3",
-      "brand": "Madza",
-      "price": 28000,
+      "name": "Toyota Hilux ",
+      "brand": "Toyota",
+      "price": 668000000,
       "information": "Động cơ: 2.0 | 5 chỗ",
       "img": "../IMG/xe5.png"
     },
     {
       "id": "6",
-      "name": "Honda City",
+      "name": "Honda Civic Type-R",
       "brand": "Honda",
-      "price": 123456789,
+      "price": 2399000000,
       "info": "1.5",
       "img": "IMG/xe6.png"
     },
     {
       "id": "7",
-      "name": "Toyota Vios",
-      "brand": "Toyota",
-      "price": 25000,
+      "name": "Honda CR-V",
+      "brand": "Honda",
+      "price": 1029000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe7.png"
     },
     {
       "id": "8",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 26000,
+      "name": "Toyota Cross",
+      "brand": "Toyota",
+      "price": 820000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe8.png"
     },
     {
       "id": "9",
-      "name": "Madza CX-3",
-      "brand": "Madza",
-      "price": 28000,
+      "name": "Toyota land Cruiser",
+      "brand": "Toyota",
+      "price": 4580000000,
       "information": "Động cơ: 2.0 | 5 chỗ",
       "img": "../IMG/xe9.png"
     },
     {
       "id": "10",
-      "name": "Honda City",
+      "name": "Honda Civic",
       "brand": "Honda",
-      "price": 26000,
+      "price": 789000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe10.png"
     },
     {
       "id": "11",
-      "name": "Madza CX-3",
-      "brand": "Madza",
-      "price": 28000,
+      "name": "Toyota Raize",
+      "brand": "Toyota",
+      "price": 510000000,
       "information": "Động cơ: 2.0 | 5 chỗ",
       "img": "../IMG/xe11.png"
     },
     {
       "id": "12",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 123456789,
+      "name": "Toyota Fortuner",
+      "brand": "Toyota",
+      "price": 1255000000,
       "info": "1.5",
       "img": "IMG/xe12.png"
     },
     {
       "id": "13",
-      "name": "Toyota Vios",
+      "name": "Toyota Land Cruiser Prado ",
       "brand": "Toyota",
-      "price": 25000,
+      "price": 3480000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe13.png"
     },
     {
       "id": "14",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 26000,
+      "name": "Toyota Corolla Cross",
+      "brand": "Toyota",
+      "price": 820000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe14.png"
     },
     {
       "id": "15",
-      "name": "Madza CX-3",
+      "name": "Madza 3 Sport",
       "brand": "Madza",
-      "price": 28000,
+      "price": 645000000,
       "information": "Động cơ: 2.0 | 5 chỗ",
       "img": "../IMG/xe15.png"
     },
     {
       "id": "16",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 123456789,
+      "name": "Mazda CX-5",
+      "brand": "Madza",
+      "price": 784000000,
       "info": "1.5",
       "img": "IMG/xe16.png"
     },
     {
       "id": "17",
-      "name": "Toyota Vios",
-      "brand": "Toyota",
-      "price": 25000,
+      "name": "Mazda 3`",
+      "brand": "Madza",
+      "price": 480000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe17.png"
     },
     {
       "id": "18",
-      "name": "Honda City",
-      "brand": "Honda",
-      "price": 26000,
+      "name": "Vinfast Vf-3",
+      "brand": "Vinfast",
+      "price": 240000000,
       "information": "Động cơ: 1.5 | 5 chỗ",
       "img": "./IMG/xe18.png"
     },
